@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Rebeca Chuffi Saccochi">
+
+<title>Lista 1: Otimização em RNA.</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Lista_1_RebecaChuffi_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/popper.min.js"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Lista_1_RebecaChuffi_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Lista_1_RebecaChuffi_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Lista_1_RebecaChuffi_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Lista_1_RebecaChuffi_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Lista_1_RebecaChuffi_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Lista_1_RebecaChuffi_files/libs/bootstrap/bootstrap-9e3ffae467580fdb927a41352e75a2e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lista 1: Otimização em RNA.</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Rebeca Chuffi Saccochi </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Tenho pouca experiência com programação (meu primeiro contato foi no início desse ano) e nunca tinha utilizado <em>R</em>, então para esse trabalho optei por utilizar <em>Python</em> fazendo as alterações necessárias no <em>Quarto</em>.</p>
+<div id="fc5ee777" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Blibliotecas Python</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Considere a função <span class="math display">\[\begin{equation}
+f(x_1, x_2) = x_1^4 + x_2^4 + x_1^2 x_2 + x_1 x_2^2 - 20x_1^2 - 15x_2^2
+\label{eq:funcao}
+\end{equation}\]</span> para responder os itens a seguir.</p>
+<p>Considere a função dada pela equação <span class="math inline">\(\ref{eq:funcao}\)</span>. Temos que <span class="math inline">\(f:\mathbb{R}^2 \to \mathbb{R}\)</span> é uma função polinomial infinitamente diferenciável, ou seja, de classe <span class="math inline">\(C^\infty\)</span>. As <strong>curvas de nível</strong> de uma função são as linhas que unem os pontos que tem a mesma “altura”. Nesse caso, para <span class="math inline">\(c\in\mathbb{R}\)</span>, seriam os pontos tais que</p>
+<p><span class="math display">\[\begin{equation}
+f(x_1, x_2) = x_1^4 + x_2^4 + x_1^2 x_2 + x_1 x_2^2 - 20x_1^2 - 15x_2^2 = c
+\label{eq:curvadenivel}
+\end{equation}\]</span></p>
+<p>Vamos usar o <strong>Matplotlib</strong> com a função <strong>contourf</strong> para plotar o gráfico das curvas de nível:</p>
+<div id="9cf76d68" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#definindo a função f no python</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1,x2):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x2<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x1<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> x2 <span class="op">+</span> x1 <span class="op">*</span> x2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span> <span class="dv">15</span> <span class="op">*</span> x2<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="6058b333" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Folha de estilo</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">2000</span>)  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">100</span>, <span class="dv">100</span>, <span class="dv">2000</span>)  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(x1, x2)  </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(x1, x2)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.contourf(x1, x2, Z, <span class="dv">50</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>) </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.colorbar()  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Curvas de Nível de $f(x_1, x_2)$ - 50 níveis'</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a> fontsize<span class="op">=</span><span class="dv">10</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">8</span>)  </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.show()     </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-4-output-1.png" width="579" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note que o gráfico ficou um pouco distorcido e não conseguimos visualizar com clareza o que acontece no centro dele. Vamos modificar os parâmetros para a seguinte configuração:</p>
+<div id="1ff17c1c" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Folha de estilo</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(x1, x2)  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(x1, x2)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.contourf(x1, x2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>) </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>plt.colorbar()  </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Curvas de Nível de $f(x_1, x_2)$ - 30 níveis'</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> fontsize<span class="op">=</span><span class="dv">10</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">8</span>)  </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>plt.show()     </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-5-output-1.png" width="572" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note que, agora, conseguimos capturar elementos que o primeiro gráfico não conseguiu (por serem elementos muito pequenos considerando a escala escolhida anteriormente). A imagem da função varia (no intervalo escolhido) entre valores próximos a <span class="math inline">\(-180\)</span> até valores próximos de <span class="math inline">\(630\)</span>. Ao analisar a estrutura da função, podemos facilmente ver que <span class="math inline">\(f(0,0)=0\)</span>, que é um ponto de nível <span class="math inline">\(0\)</span> no gráfico. (apenas uma checagem para verificar se temos algum erro imediato de programação).</p>
+<p>Sabemos que curvas de nível mais próximas indicam uma parte mais íngreme da função, que é o que ocorre a medida que o gráfico se aproxima das extremidades da área demarcada. Sobre os candidatos <em>pontos críticos</em>, note que temos três áreas mais escuras próximas aos pontos <span class="math inline">\((-3.5, 3)\)</span>, <span class="math inline">\((-3.5, -3)\)</span> e <span class="math inline">\((3.5, -3.8)\)</span> que podem indicar pontos críticos mínimos (não sabemos se locais ou globais). A região próxima ao ponto <span class="math inline">\((-3.5, -3)\)</span> parece ser mais escura, indicando a possibilidade de um mínimo global (ou menor que os outros dois pontos citados). Pelo primeiro gráfico, podemos notar que mesmo considerando um domínio maior, o gráfico não indica valores mínimos fora da caixa que estamos considerando no segundo gráfico (aqui, claro, considerando uma análise totalmente visual que pode estar sendo enganosa num primeiro momento).</p>
+<p>Nesta parte do problema, estamos interessados em encontrar o <strong>gradiente</strong> da função para entender se nossos palpites da parte A estavam no caminho certo. Como temos duas variáveis e uma função com resultado real, o gradiente pode ser representado por:</p>
+<p><span class="math display">\[\begin{equation}
+\nabla_x f(x_1,x_2) = \left( \frac{\partial f}{\partial x_1}(x_1,x_2), \frac{\partial f}{\partial x_2}(x_1,x_2) \right)
+\label{eq:gradgeral}
+\end{equation}\]</span></p>
+<p>Para o cálculo de derivadas, vamos usar o <strong>sympy</strong>. Para essa função específica poderíamos efetuar os cálculos manualmente, porém vamos deixar um código preparado para que outros problemas possam ser analisados de forma mais sistemática:</p>
+<div id="2d06f22a" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> sp.symbols(<span class="st">'x1 x2'</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> x1<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x2<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x1<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> x2 <span class="op">+</span> x1 <span class="op">*</span> x2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_dx1 <span class="op">=</span> sp.diff(f, x1)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>df_dx2 <span class="op">=</span> sp.diff(f, x2)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Derivada parcial de f com relação a x1:"</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_dx1)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Derivada parcial de f com relação a x2:"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_dx2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Derivada parcial de f com relação a x1:
+4*x1**3 + 2*x1*x2 - 40*x1 + x2**2
+
+Derivada parcial de f com relação a x2:
+x1**2 + 2*x1*x2 + 4*x2**3 - 30*x2</code></pre>
+</div>
+</div>
+<p>Logo,</p>
+<p><span class="math display">\[\begin{equation}
+\nabla_x f(x_1,x_2) = \left( 4x_1^3 + x_2^2 + 2x_1 x_2 - 40x_1, 4x_2^3 + x_1^2 + 2x_1 x_2 - 30x_2 \right)
+\label{eq:gradf}
+\end{equation}\]</span></p>
+<p>Como visto em aula, a ideia do método do <strong>Gradiente Descendente</strong> é partir de um vetor inicial de parâmetros (que nesse caso é representado por <span class="math inline">\(\Phi =(x_1,x_2)\)</span>) e andar na <em>direção oposta</em> ao gradiente (pois essa será a direção mais provável de um ponto de mínimo da função). Considerando que <span class="math inline">\(\Phi_0= (x^0_1,x^0_2)\)</span> é o parâmetro inicial escolhido para a inicialização. Então, temos a seguinte recorrência:</p>
+<p><span class="math display">\[\begin{equation}
+\Phi_{t+1} = \Phi_{t} - \alpha \nabla_x f(\Phi_{t})
+\label{eq:gradd}
+\end{equation}\]</span></p>
+<p>Como já calculamos o gradiente da função <span class="math inline">\(f\)</span> em <span class="math inline">\(\ref{eq:gradf}\)</span>, vamos definir uma função que tenha como entrada a taxa de aprendizado <span class="math inline">\(\alpha\)</span>, o número de passos <span class="math inline">\(n\)</span> e o ponto de partida <span class="math inline">\(p = \Phi_0= (x^0_1,x^0_2)\)</span>:</p>
+<div id="902531bd" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_df(a: <span class="bu">float</span>, p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inicializa o vetor de pontos p com a entrada fornecida</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>         x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> gradf(pontos[<span class="dv">0</span>][<span class="dv">0</span>], pontos[<span class="dv">0</span>][<span class="dv">1</span>])  </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">1</span>])</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>      pontos.append(pd) </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Ao inicializar no ponto </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">, com </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> passos e taxa'</span>)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'de aprendizagem </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss"> chegamos a'</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>pontos[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>) </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'pelo método do Gradiente Descendente'</span>)      </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Considere o ponto inicial <span class="math inline">\(p = (0,5)\)</span> com taxa de aprendizado de <span class="math inline">\(0.01\)</span> e <span class="math inline">\(100\)</span> passos executados:</p>
+<div id="4bfe3bd1" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>grad_df(a,p,n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e taxa
+de aprendizagem 0.01 chegamos a
+(-3.0401412706844373, 2.865981423744074)
+pelo método do Gradiente Descendente</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="106">
+<pre><code>(-3.0401412706844373, 2.865981423744074)</code></pre>
+</div>
+</div>
+<p>Agora vamos <strong>variar a taxas de aprendizagem</strong> mantendo o número de passos e o ponto inicial iguais aos do item anterior. Testando os valores menores, temos:</p>
+<div id="dfa1303d" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>taxas <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.001</span>, <span class="fl">0.0001</span>]  </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">5</span>)  </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">100</span>  </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> a <span class="kw">in</span> taxas:</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> f(x1, x2):</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span>  </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> grad_df(a, p, n)   </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])  </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>) </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e taxa
+de aprendizagem 0.01 chegamos a
+(-3.0401412706844373, 2.865981423744074)
+pelo método do Gradiente Descendente
+O valor de f nesse ponto é de -153.6490976846798
+
+Ao inicializar no ponto (0, 5), com 100 passos e taxa
+de aprendizagem 0.001 chegamos a
+(-2.9401850139854755, 2.863626932709569)
+pelo método do Gradiente Descendente
+O valor de f nesse ponto é de -153.27803824887297
+
+Ao inicializar no ponto (0, 5), com 100 passos e taxa
+de aprendizagem 0.0001 chegamos a
+(-0.1983707534904601, 3.489303251581688)
+pelo método do Gradiente Descendente
+O valor de f nesse ponto é de -37.45553147126776
+</code></pre>
+</div>
+</div>
+<p>Considerando as taxas <span class="math inline">\(0.01\)</span> e <span class="math inline">\(0.001\)</span> chegamos a pontos con valores muito próximos: <span class="math inline">\(-153.649\)</span> e <span class="math inline">\(-153.278\)</span> respectivamente. Esses valores estão associados ao ponto <span class="math inline">\((-3, 2.8)\)</span>, que seria o ponto de mínimo encontrado pelo nosso algoritmo. Se olharmos novamente para o gráfico de curvas de nível da parte A., concluímos que nas condições citadas o algoritmo pára próximo à região superior esquerda, um dos pontos que notamos ser mais escuro no gráfico.</p>
+<p>Já a taxa de <span class="math inline">\(0.0001\)</span> parece ser muito pequena para a quantidade de passos (<span class="math inline">\(100\)</span>) que estamos considerando, pois o valor da função no ponto no qual o algoritmo pára é de aproximadamente <span class="math inline">\(-37.455\)</span>, número muito maior que os dois anteriores. Esse valor está associado ao ponto <span class="math inline">\((-0.198, 3.489)\)</span>, valor um pouco à direita da região mais escura do gráfico (superior esquerda). A impressão que temos é que “estava chegando lá”, mas não tivemos passos suficientes para atingir o objetivo (considerando o pequeno tamanho de passo).</p>
+<p>Agora quando consideramos as taxas <span class="math inline">\(1\)</span> e <span class="math inline">\(0.1\)</span>, não foi possível finalizar o algoritmo pois o Python indicou valor muito alto para a magnetude gradiente depois de algumas etapas, ou seja: o valor da taxa não é suficiente para impedir que o valor do gradiente exploda em termos de módulo.</p>
+<p>Para tentar monitorar essa questão, considere a seguinte função (que monitora a magnetude do gradiente em cada etapa):</p>
+<div id="f7bf3958" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    grad_x1 <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">-</span> <span class="dv">40</span> <span class="op">*</span> x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    grad_x2 <span class="op">=</span> x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span> <span class="op">*</span> x1 <span class="op">*</span> x2 <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span> <span class="op">*</span> x2</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [grad_x1, grad_x2]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_dfm(a, p, n):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> [p]</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> t <span class="op">&lt;</span> n:</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradf(p[t][<span class="dv">0</span>], p[t][<span class="dv">1</span>])</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        grad_magnitude <span class="op">=</span> (grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)<span class="op">**</span><span class="fl">0.5</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"Tamanho do gradiente na iteração </span><span class="sc">{</span>t<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>grad_magnitude<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        p.append([p[t][<span class="dv">0</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">0</span>], p[t][<span class="dv">1</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">1</span>]])</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        t <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Vamos testar apenas para <span class="math inline">\(n=4\)</span>, pois depois disso obtivemos a seguinte mensagem de erro:</p>
+<div id="bdf7b08a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span>  </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">5</span>)  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">4</span>  </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>grad_dfm(a, p, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tamanho do gradiente na iteração 0: 350.891721190455
+Tamanho do gradiente na iteração 1: 164226292.02316007
+Tamanho do gradiente na iteração 2: 1.771679586077537e+25
+Tamanho do gradiente na iteração 3: 2.224413563985978e+76</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="109">
+<pre><code>[-249326014834506929207357610621490765735384600378600,
+ 22244135639859779482203935983307886306561487197708452939075445824682438682730]</code></pre>
+</div>
+</div>
+<p>Note que na quarta iteração o gradiente já é da ordem de <span class="math inline">\(e^{76}\)</span>, o que torna o processo impraticável. Assim como para taxa de <span class="math inline">\(1\)</span>, a taxa de <span class="math inline">\(0.1\)</span> não é pequena o suficiente:</p>
+<div id="770ecf03" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.1</span>  </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> (<span class="dv">0</span>, <span class="dv">5</span>)  </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">5</span>  </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>grad_dfm(a, p, n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tamanho do gradiente na iteração 0: 350.891721190455
+Tamanho do gradiente na iteração 1: 106949.27919491791
+Tamanho do gradiente na iteração 2: 4851387622580.395
+Tamanho do gradiente na iteração 3: 4.567282658546349e+35
+Tamanho do gradiente na iteração 4: 3.810953600009575e+104</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="110">
+<pre><code>[-2.0369409624887195e+68, -3.810953600009575e+103]</code></pre>
+</div>
+</div>
+<p>Na quinta iteração o gradiente já é da ordem de <span class="math inline">\(e^{104}\)</span>, o que torna o processo impraticável.</p>
+<p>Com isso, concluímos que para o ponto inicial <span class="math inline">\((0,5)\)</span> e considerando <span class="math inline">\(100\)</span> passos a taxa de aprendizagem de <span class="math inline">\(0.01\)</span> é a mais adequada. A taxa de <span class="math inline">\(0.001\)</span> não perde por muito, logo, se formos considerar mais passos, essa pode ser uma outra opção.</p>
+<p>Agora vamos gerar <span class="math inline">\(10\)</span> pontos aleatórios escolhidos a partir de um um quadrado <span class="math inline">\(-5 &lt; x_1,x_2 &lt; 5\)</span> (uniformemente) e refazer o gráfico do item A.</p>
+<div id="28429ed6" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>pontos_aleatorios <span class="op">=</span> []</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(x1)):</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    pontos_aleatorios.append((<span class="bu">float</span>(x1[i]), <span class="bu">float</span>(x2[i])))</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pontos_aleatorios)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[(-1.254598811526375, -4.7941550570419755), (4.507143064099161, 4.699098521619943), (2.3199394181140507, 3.324426408004218), (0.986584841970366, -2.8766088932172384), (-3.439813595575635, -3.181750327928994), (-3.4400547966379733, -3.165954901465662), (-4.419163878318005, -1.9575775704046228), (3.6617614577493516, 0.24756431632237863), (1.0111501174320878, -0.6805498135788426), (2.0807257779604544, -2.0877085980195806)]</code></pre>
+</div>
+</div>
+<p>Vamos refazer o gráfico do item a) adicionando uma linha representando o caminho percorrido por cada uma das <span class="math inline">\(10\)</span> otimizações (com os <span class="math inline">\(10\)</span> pontos distintos e consierando a taxa de aprendizado de <span class="math inline">\(0.01\)</span>). Para isso, vamos ter que modificar um pouco a função com o objetivo de armazenar os pontos de cada etapa do Gradiente Descendente:</p>
+<div id="048b78ed" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#modificando a função criada anteriormente</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#para exibir a lista de pontos gerada e não</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#apenas o último ponto</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_df_list(a: <span class="bu">float</span>, p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>):</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inicializa o vetor de pontos p com a entrada fornecida</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>         x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> gradf(pontos[<span class="dv">0</span>][<span class="dv">0</span>], pontos[<span class="dv">0</span>][<span class="dv">1</span>])</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>      pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">-</span> a <span class="op">*</span> grad[<span class="dv">1</span>])</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>      pontos.append(pd)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotando o gráfico usado em a</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)  <span class="co"># Cor do fundo</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)  <span class="co"># Cor do quadriculado</span></span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>x1 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>x2 <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">100</span>)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>X1, X2 <span class="op">=</span> np.meshgrid(x1, x2)</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> f(X1, X2)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>plt.contourf(X1, X2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Diferentes inicializações - Gradiente Descendente de f'</span>,</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a> fontsize<span class="op">=</span><span class="dv">8</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> p <span class="kw">in</span> pontos_aleatorios:</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    caminho <span class="op">=</span> grad_df_list(<span class="fl">0.01</span>, p, <span class="dv">10</span>)</span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>    caminho_x <span class="op">=</span> [point[<span class="dv">0</span>] <span class="cf">for</span> point <span class="kw">in</span> caminho]</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>    caminho_y <span class="op">=</span> [point[<span class="dv">1</span>] <span class="cf">for</span> point <span class="kw">in</span> caminho]</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(caminho)<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>        plt.arrow(caminho_x[i], caminho_y[i],</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>             caminho_x[i<span class="op">+</span><span class="dv">1</span>] <span class="op">-</span> caminho_x[i], caminho_y[i<span class="op">+</span><span class="dv">1</span>] <span class="op">-</span> caminho_y[i],</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>             head_width<span class="op">=</span><span class="fl">0.1</span>, head_length<span class="op">=</span><span class="fl">0.1</span>, fc<span class="op">=</span><span class="st">'#FFD700'</span>,</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>              ec<span class="op">=</span><span class="st">'#FFD700'</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>    plt.text(caminho_x[<span class="dv">0</span>], caminho_y[<span class="dv">0</span>],</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>     <span class="ss">f'P</span><span class="sc">{</span>pontos_aleatorios<span class="sc">.</span>index(p) <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss"> = (</span><span class="sc">{</span><span class="bu">round</span>(caminho_x[<span class="dv">0</span>], <span class="dv">2</span>)<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span><span class="bu">round</span>(caminho_y[<span class="dv">0</span>], <span class="dv">2</span>)<span class="sc">}</span><span class="ss">)'</span>,</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>     fontsize<span class="op">=</span><span class="dv">5</span>, ha<span class="op">=</span><span class="st">'center'</span>, va<span class="op">=</span><span class="st">'center'</span>, color<span class="op">=</span><span class="st">'white'</span>)    </span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-14-output-1.png" width="572" height="445" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Analisando a figura acima, note que os pontos <span class="math inline">\(P_2\)</span> e <span class="math inline">\(P_3\)</span>, que foram inicializados na parte superior direita chegaram no mínimo (que parece um mínimo local) do canto superior direito depois de <span class="math inline">\(100\)</span> passos. Já <span class="math inline">\(P_4\)</span>, <span class="math inline">\(P_8\)</span>, <span class="math inline">\(P_9\)</span>, <span class="math inline">\(P_{10}\)</span>, depois de <span class="math inline">\(100\)</span> passos, caíram no mínimo (possivelmente local) do canto inferior direito. Agora <span class="math inline">\(P_5\)</span>, <span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_3\)</span>, que são pontos localizados no canto inferior direito caíram no mínimo (aparentemente global - ou menor que os outros por ser mais escuro) no canto inferior esquerdo.</p>
+<p>Note também que <span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_2\)</span>, <span class="math inline">\(P_3\)</span> têm tamanhos do primeiro passo grandes, o que indica uma magnetude maior do gradiente nessa etapa. Felizmente a taxa de aprendizado foi suficientemente pequena para que o algoritmo convergisse para um ponto mínimo.</p>
+<p>Portanto, concluímos que dos <span class="math inline">\(10\)</span> pontos selecionados aleatoriamente, todos caíram num mínimo já observado em no gráfico anterior (todos convergiram), mas apenas <span class="math inline">\(3\)</span> deles para um mínimo (aparentemente) global, ou seja, <span class="math inline">\(30%\)</span> das vezes.</p>
+<p>Tendo em vista algumas atualizações que podemos realizar no método original do Gradiente Descendente, um deles é adicionar <em>momentum</em> no cálculo do mesmo. Considere como referência a <em>Seção 8.3.2</em> do livro <strong>Deep Learning</strong> e use a taxa de aprendizado <span class="math inline">\(\epsilon = 0.01\)</span>, parâmetro de momento <span class="math inline">\(\alpha = 0.9\)</span> e velocidade inicial <span class="math inline">\(v = 0\)</span>. Vamos inicianizar com o ponto <span class="math inline">\((0.5)\)</span> e <span class="math inline">\(100\)</span> passos. O método do <em>Gradiente com Momento</em> adiciona um fator de “memória” que leva em consideração contribuição de cada gradiente.</p>
+<p>Considerando a notação apresentada na referência citada acima e o caso específico da nossa função <span class="math inline">\(f\)</span>, temos que <span class="math inline">\(\Phi_{0}\)</span> é o ponto de inicialização e <span class="math inline">\(\Phi_{t}\)</span> o ponto anterior à movimentação para <span class="math inline">\(\Phi_{t+1}\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+v \gets \alpha v - \epsilon \nabla_x f(\Phi_{t})
+\label{eq:,mom1}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\Phi_{t+1} \gets \Phi_{t} + v
+\label{eq:mom2}
+\end{equation}\]</span></p>
+<p>Ao adaptar a função criada anteriormente, temos:</p>
+<div id="7298bf79" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f_mome(a: <span class="bu">float</span>, p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>         x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    grad <span class="op">=</span> gradf(pontos[<span class="dv">0</span>][<span class="dv">0</span>], pontos[<span class="dv">0</span>][<span class="dv">1</span>])  </span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>      grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>      v <span class="op">=</span> [a <span class="op">*</span> v[i] <span class="op">-</span> e <span class="op">*</span> grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v))] </span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>      <span class="co">#acima escolhemos a notação em lan(v) para ser escalável em</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>      <span class="co">#mais dimensões</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>      pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> v[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> v[<span class="dv">1</span>])</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>      pontos.append(pd) </span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Ao inicializar no ponto </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">, com </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> passos e parâmetros '</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'a = </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, e = </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'pelo método do Gradiente Descendente com Momento, obtivemos:'</span>)  </span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>pontos[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)       </span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Agora vamos testar a função para os parâmetros sugeridos:</p>
+<div id="65db7d05" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_mome(<span class="fl">0.9</span>, (<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.01</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e parâmetros 
+a = 0.9, e = 0.01
+pelo método do Gradiente Descendente com Momento, obtivemos:
+(3.275777117878277, -2.617305302766108)
+O valor de f nesse ponto é de -160.9394732174183
+</code></pre>
+</div>
+</div>
+<p>Note que, considerando nossa primeira função do método do Gradiente Descendente o resultado foi: <span class="math inline">\((-3.0401412706844373, 2.865981423744074)\)</span>, com valor de função igual à <span class="math inline">\(-153.6490976846798\)</span>. Já usando o método de Gradiente Descendente com Momento, chegamos no ponto <span class="math inline">\((3.275777117878277, -2.617305302766108)\)</span> e função igual à <span class="math inline">\(-160.9394732174183\)</span> com a mesma quantidade de passos. Se olharmos para o gráfico de curvas de nível, vamos notar que o método com o momento não pára no ponto crítico superior esquerdo, como aconteceu antes. Nesse caso, ele vai para um outro ponto crítico (outro mínimo local) na área inferior direita. Além disso, se fizermos uma modificação na taxa <span class="math inline">\(\alpha = 0.001\)</span> conseguimos chegar próximo ao mínimo (possivelmente) global:</p>
+<div id="49ee507a" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_mome(<span class="fl">0.9</span>, (<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.001</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e parâmetros 
+a = 0.9, e = 0.001
+pelo método do Gradiente Descendente com Momento, obtivemos:
+(-3.5243911571405624, -3.202209041020609)
+O valor de f nesse ponto é de -218.71715905030408
+</code></pre>
+</div>
+</div>
+<p>Agora vamos utilizar o método <strong>RMSProp</strong> da <em>Seção 8.5.2</em> do livro <strong>Deep Learning</strong> e usar a taxa de aprendizado global <span class="math inline">\(\epsilon = 0.001\)</span>, taxa de decaimento <span class="math inline">\(\rho = 0.9\)</span> e constante <span class="math inline">\(\delta = 10^{-6}\)</span>. O algoritmo RMSProp ajusta a taxa de aprendizado com base nos gradientes passados normalizando através da raiz quadrada de uma média exponencial dos gradientes anteriores (quadrados).</p>
+<p>Considerando a notação apresentada na referência citada acima e o caso específico da nossa função <span class="math inline">\(f\)</span>, temos que <span class="math inline">\(\Phi_{0}\)</span> é o ponto de inicialização e <span class="math inline">\(\Phi_{t}\)</span> o ponto anterior à movimentação para <span class="math inline">\(\Phi_{t+1}\)</span>. Além disso, usaremos <span class="math inline">\(\odot\)</span> para denotar a operação que multiplica elemento a elemento dentro de uma matriz. Ou seja, <span class="math inline">\(g\odot g\)</span> seria o gradiente “vezes” o gradiente (elemento a elemento) o que resultaria no quadrado de cada entrada. Chamaremos de <span class="math inline">\(r\)</span> o quadrado acumulado do gradiente:</p>
+<p><span class="math display">\[\begin{equation}
+r \gets \rho r + (1-\rho) \nabla_x f(\Phi_{t}) \odot \nabla_x f(\Phi_{t}) = \rho r + (1-\rho) g \odot g
+\label{eq:rmsp1}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\Delta \Phi_{t} \gets - \frac{\epsilon}{\delta + \sqrt{r}} \odot g
+\label{eq:rmsp2}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\Phi_{t+1} \gets \Phi_{t} + \Delta \Phi_{t}
+\label{eq:rmsp3}
+\end{equation}\]</span></p>
+<p>Ao adaptar a função criada anteriormente, temos:</p>
+<div id="8b653d2c" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f_rmsp(p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>, rh: <span class="bu">float</span>, de: <span class="bu">float</span>):</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inicializa o vetor de pontos p com a entrada fornecida</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>         x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>      grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>      grad_2 <span class="op">=</span> (grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>,grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>      r <span class="op">=</span> [r[i]<span class="op">*</span>rh <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh)<span class="op">*</span>grad_2[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))] </span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>      <span class="co">#acima escolhemos a notação em len(r) para ser escalável em</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>      <span class="co">#mais dimensões</span></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>      d <span class="op">=</span> [<span class="op">-</span>(e <span class="op">/</span> (math.sqrt(r[i] <span class="op">+</span> de))) <span class="op">*</span> grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]  </span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>      pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> d[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> d[<span class="dv">1</span>])</span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>      pontos.append(pd) </span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Ao inicializar no ponto </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">, com </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> passos e parâmetros '</span>)</span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'rh = </span><span class="sc">{</span>rh<span class="sc">}</span><span class="ss">, e = </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'pelo método do Gradiente RMSProp, obtivemos:'</span>)  </span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>pontos[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)       </span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Agora vamos aplicar a função acima nos parâmetros indicados:</p>
+<div id="c00836e4" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_rmsp((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.001</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">6</span>))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e parâmetros 
+rh = 0.9, e = 0.001
+pelo método do Gradiente RMSProp, obtivemos:
+(-0.10979229843368189, 4.891533086159593)
+O valor de f nesse ponto é de 210.7904925118437
+</code></pre>
+</div>
+</div>
+<p>Passei algumas horas tentando entender porque a performance do algoritmo RMSProp está pior que o anterior. Revisei o código e acredito que está tudo correto, então comecei a fazer outros testes para tentar entender o problema. Aparentemente o número de interações é muito pequeno para o tamanho da taxa escolhida de <span class="math inline">\(0.01\)</span> e isso acontece porque, começando com <span class="math inline">\(r\)</span> muito pequeno, o passo fica muito grande inicialmente, logo não temos tempo (interações) suficientes para que o ponto convirja para um ponto de mínimo. Como <span class="math inline">\(\rho\)</span> nesse caso também é muito pequeno, ele não consegue acelerar esse processo. A solução desse problema (para o mesmo número de passos) será feita na próxima questão.</p>
+<p>Considere os seguintes exemplos (mudando os parâmetros):</p>
+<div id="3ffbea62" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#2000 interações</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_rmsp((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">2000</span>, <span class="fl">0.001</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">6</span>)) </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 2000 passos e parâmetros 
+rh = 0.9, e = 0.001
+pelo método do Gradiente RMSProp, obtivemos:
+(-2.0143629991659813, 3.021320406339329)
+O valor de f nesse ponto é de -124.41534244930556
+</code></pre>
+</div>
+</div>
+<div id="f8660601" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1000 interações</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_rmsp((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">1000</span>, <span class="fl">0.01</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">6</span>)) </span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 1000 passos e parâmetros 
+rh = 0.9, e = 0.01
+pelo método do Gradiente RMSProp, obtivemos:
+(-3.0351291217117033, 2.8609681572725414)
+O valor de f nesse ponto é de -153.64734400284024
+</code></pre>
+</div>
+</div>
+<div id="b4701eca" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#1000 interações</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> grad_f_rmsp((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.1</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">6</span>)) </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e parâmetros 
+rh = 0.9, e = 0.1
+pelo método do Gradiente RMSProp, obtivemos:
+(-3.034475077300627, 2.8208551852942096)
+O valor de f nesse ponto é de -153.5851972977133
+</code></pre>
+</div>
+</div>
+<p>Concluímos que para usar 100 passos e atingir um valor próximo de um mínimo (ainda usando esse algoritmo) é preciso aumentar o <span class="math inline">\(\epsilon\)</span>, como foi feito no último exemplo. Para usar <span class="math inline">\(\epsilon = 0.001\)</span> tivemos que aumentar o número de interações para <span class="math inline">\(2000\)</span> para chegarmos num resultado aceitável (como no algoritmo que usa momento)</p>
+<p>Finalmente chegamos ao <strong>Adam</strong>, método amplamente utilizado. Como referência temosa <em>Seção 8.5.3</em> do livro <strong>Deep Learning</strong> e usando a taxa de aprendizado global <span class="math inline">\(\epsilon = 0.001\)</span> e taxas de decaimento <span class="math inline">\(\rho_1 = 0.9\)</span> e <span class="math inline">\(\rho_2 = 0.999\)</span>. O algoritmo Adam é exatamente a combinação do RMSProp e do gradiente considerando o Momento. De maneira geral, ele trabalha com uma taxa adaptativa que faz com que o passo seja grande no início (para que o algoritmo possa explorar o espaço) e pequeno no fim, afunilando nos pontos de importância. Além disso, por ter momento, ele considera a “memória” passada dos gradientes das iterações passadas.</p>
+<p>Considerando a notação apresentada na referência citada acima e considerando o caso específico da nossa função <span class="math inline">\(f\)</span>, temos que:</p>
+<p><span class="math display">\[\begin{equation}
+r \gets \rho_2 r + (1-\rho_2) \nabla_x f(\Phi_{t}) \odot \nabla_x f(\Phi_{t}) = \rho_2 r + (1-\rho_2) g \odot g
+\label{eq:adam1}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+s \gets \rho_1 s + (1-\rho_1) \nabla_x f(\Phi_{t}) \odot \nabla_x f(\Phi_{t}) = \rho_1 r + (1-\rho_1) g
+\label{eq:adam2}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\hat{s} \leftarrow \frac{s}{1 - \rho_1^t}
+\label{eq:adam3}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\hat{r} \leftarrow \frac{r}{1 - \rho_2^t}
+\label{eq:adam4}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\Delta \Phi_{t} = -\epsilon \frac{\hat{s}}{\sqrt{\hat{r} + \delta}}
+\label{eq:adam5}
+\end{equation}\]</span></p>
+<p><span class="math display">\[\begin{equation}
+\Phi_{t+1} \gets \Phi_{t} + \Delta \Phi_{t}
+\label{eq:adam5}
+\end{equation}\]</span></p>
+<p>Ao adaptar a função criada anteriormente, temos:</p>
+<div id="b74aa387" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ADAM_f(p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>, rh1: <span class="bu">float</span>, rh2: <span class="bu">float</span>, de: <span class="bu">float</span>):</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Inicializa o vetor de pontos p com a entrada fornecida</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>         x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>      grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>      grad_2 <span class="op">=</span> (grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>,grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>      r <span class="op">=</span> [r[i]<span class="op">*</span>rh2 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh2)<span class="op">*</span>grad_2[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))] </span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>      <span class="co">#acima escolhemos a notação em len(r) para ser escalável em</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>      <span class="co">#mais dimensões</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>      s <span class="op">=</span> [s[i]<span class="op">*</span>rh1 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh1)<span class="op">*</span>grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))] </span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>      s_hat <span class="op">=</span> [s[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh1<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))]</span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>      r_hat <span class="op">=</span> [r[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh2<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>      d <span class="op">=</span> [<span class="op">-</span>(e <span class="op">*</span> s_hat[i]) <span class="op">/</span> (math.sqrt(r_hat[i]) <span class="op">+</span> de) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s_hat))]</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>      pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> d[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> d[<span class="dv">1</span>])</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>      pontos.append(pd) </span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'Ao inicializar no ponto </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">, com </span><span class="sc">{</span>n<span class="sc">}</span><span class="ss"> passos e parâmetros '</span>)</span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'rh1 = </span><span class="sc">{</span>rh1<span class="sc">}</span><span class="ss">,  e = </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss"> e rh2 = </span><span class="sc">{</span>rh2<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'pelo método ADAM, obtivemos:'</span>)  </span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>pontos[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>)       </span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note que, na função acima, modificamos <span class="math inline">\(\hat{s}\)</span> e <span class="math inline">\(\hat{r}\)</span> para potência de <span class="math inline">\(t+1\)</span> no lugar de pontência de <span class="math inline">\(t\)</span> para evitar divisão por zero.</p>
+<div id="b9665474" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#100 interações</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> ADAM_f((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.001</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>)) </span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 100 passos e parâmetros 
+rh1 = 0.9,  e = 0.001 e rh2 = 0.999
+pelo método ADAM, obtivemos:
+(-0.1013468156442363, 4.901360793367915)
+O valor de f nesse ponto é de 214.1810222591261
+</code></pre>
+</div>
+</div>
+<p>Bom, aparentemente encontramos o mesmo problema anterior para o ADAM (poucas interações). Vamos modificar a função para adicionar um debug visual:</p>
+<div id="5a0a8b27" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ADAM_f2(p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>, rh1: <span class="bu">float</span>, rh2: <span class="bu">float</span>, de: <span class="bu">float</span>):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> f(x1, x2):</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x2<span class="op">**</span><span class="dv">4</span> <span class="op">+</span> x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2 <span class="op">+</span> x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Iteração | x1       | x2       | f(x)     | Gradiente"</span>)</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-"</span> <span class="op">*</span> <span class="dv">50</span>)</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>        grad_2 <span class="op">=</span> [grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>, grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>]</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> [s[i]<span class="op">*</span>rh1 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh1)<span class="op">*</span>grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))]</span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> [r[i]<span class="op">*</span>rh2 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh2)<span class="op">*</span>grad_2[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>        s_hat <span class="op">=</span> [s[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh1<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">if</span> t <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> s[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))]</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>        r_hat <span class="op">=</span> [r[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh2<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">if</span> t <span class="op">&gt;</span> <span class="dv">0</span> <span class="cf">else</span> r[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb40-26"><a href="#cb40-26" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-27"><a href="#cb40-27" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> [<span class="op">-</span>(e <span class="op">*</span> s_hat[i]) <span class="op">/</span> (math.sqrt(<span class="bu">max</span>(r_hat[i], <span class="fl">1e-10</span>)) <span class="op">+</span> de) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s_hat))]</span>
+<span id="cb40-28"><a href="#cb40-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-29"><a href="#cb40-29" aria-hidden="true" tabindex="-1"></a>        pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> d[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> d[<span class="dv">1</span>])</span>
+<span id="cb40-30"><a href="#cb40-30" aria-hidden="true" tabindex="-1"></a>        pontos.append(pd)</span>
+<span id="cb40-31"><a href="#cb40-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb40-32"><a href="#cb40-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Debug a cada 20 iterações</span></span>
+<span id="cb40-33"><a href="#cb40-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> t <span class="op">%</span> <span class="dv">10</span> <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb40-34"><a href="#cb40-34" aria-hidden="true" tabindex="-1"></a>            current_f <span class="op">=</span> f(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb40-35"><a href="#cb40-35" aria-hidden="true" tabindex="-1"></a>            grad_norm <span class="op">=</span> math.sqrt(grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb40-36"><a href="#cb40-36" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>t<span class="sc">:8}</span><span class="ss"> | </span><span class="sc">{</span>pontos[t][<span class="dv">0</span>]<span class="sc">:8.4f}</span><span class="ss"> | </span><span class="sc">{</span>pontos[t][<span class="dv">1</span>]<span class="sc">:8.4f}</span><span class="ss"> | </span><span class="sc">{</span>current_f<span class="sc">:8.2f}</span><span class="ss"> | </span><span class="sc">{</span>grad_norm<span class="sc">:8.4f}</span><span class="ss">"</span>)</span>
+<span id="cb40-37"><a href="#cb40-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-38"><a href="#cb40-38" aria-hidden="true" tabindex="-1"></a>    final_f <span class="op">=</span> f(pontos[<span class="op">-</span><span class="dv">1</span>][<span class="dv">0</span>], pontos[<span class="op">-</span><span class="dv">1</span>][<span class="dv">1</span>])</span>
+<span id="cb40-39"><a href="#cb40-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Resultado final: </span><span class="sc">{</span>pontos[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-40"><a href="#cb40-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Valor da função: </span><span class="sc">{</span>final_f<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb40-41"><a href="#cb40-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb40-42"><a href="#cb40-42" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos[<span class="op">-</span><span class="dv">1</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="118d293e" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>    resultado <span class="op">=</span> ADAM_f2((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">100</span>, <span class="fl">0.001</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Iteração | x1       | x2       | f(x)     | Gradiente
+--------------------------------------------------
+       0 |   0.0000 |   5.0000 |   250.00 | 350.8917
+      10 |  -0.0122 |   4.9878 |   245.46 | 347.5228
+      20 |  -0.0222 |   4.9779 |   241.76 | 344.7710
+      30 |  -0.0322 |   4.9679 |   238.09 | 342.0385
+      40 |  -0.0423 |   4.9580 |   234.46 | 339.3271
+      50 |  -0.0524 |   4.9481 |   230.87 | 336.6377
+      60 |  -0.0625 |   4.9382 |   227.31 | 333.9706
+      70 |  -0.0727 |   4.9284 |   223.78 | 331.3260
+      80 |  -0.0830 |   4.9186 |   220.30 | 328.7038
+      90 |  -0.0932 |   4.9089 |   216.84 | 326.1038
+
+Resultado final: (-0.10351119046083711, 4.899203282142462)
+Valor da função: 213.42618796046366</code></pre>
+</div>
+</div>
+<p>Note que o gradiente está se aproximando de zero muito lentamente e com isso o valor da função está diminuindo lentamente também. Vamos considerar um número de passos maior:</p>
+<div id="ea0ab905" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x1, x2):</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x2<span class="op">**</span><span class="dv">4</span><span class="op">+</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>x2<span class="op">+</span>x1<span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">20</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>resultado <span class="op">=</span> ADAM_f((<span class="dv">0</span>,<span class="dv">5</span>), <span class="dv">1000</span>, <span class="fl">0.001</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, <span class="fl">1e-8</span>) </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>fun <span class="op">=</span> f(resultado[<span class="dv">0</span>], resultado[<span class="dv">1</span>])</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'O valor de f nesse ponto é de </span><span class="sc">{</span>fun<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Ao inicializar no ponto (0, 5), com 1000 passos e parâmetros 
+rh1 = 0.9,  e = 0.001 e rh2 = 0.999
+pelo método ADAM, obtivemos:
+(-1.1443028927601104, 4.167447792218679)
+O valor de f nesse ponto é de 2.2291269668587574
+</code></pre>
+</div>
+</div>
+<p>Comparei a minha função criada com o algoritmo pré-definido e deram o mesmo resultado. Ou seja, talvez seja o número de passos e/ou tamanho do passo que não está ideal nesse contexto. Vamos analisar melhor essas questões na parte seguinte.</p>
+<p>Vamos comparar os seguintes métodos:</p>
+<p>Usaremos algo semelhante à definição de <strong>grad_df_list</strong> definido anteriormente, para que consigamos capturar os pontos de cada iteração:</p>
+<p><strong>M2: Gradiente Descendente com momento (lista)</strong></p>
+<div id="4cfc099c" class="cell" data-execution_count="27">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f_mome_list(a: <span class="bu">float</span>, p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>):</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>        v <span class="op">=</span> [a <span class="op">*</span> v[i] <span class="op">-</span> e <span class="op">*</span> grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(v))]</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>        pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> v[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> v[<span class="dv">1</span>])</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>        pontos.append(pd)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>M3: RMSProp (lista)</strong></p>
+<div id="f02726b0" class="cell" data-execution_count="28">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_f_rmsp_list(p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>, rh: <span class="bu">float</span>, de: <span class="bu">float</span>):</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>        grad_2 <span class="op">=</span> (grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>, grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> [r[i]<span class="op">*</span>rh <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh)<span class="op">*</span>grad_2[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> [<span class="op">-</span>(e <span class="op">/</span> (math.sqrt(r[i] <span class="op">+</span> de))) <span class="op">*</span> grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>        pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> d[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> d[<span class="dv">1</span>])</span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>        pontos.append(pd)</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>M4: Adam (lista)</strong></p>
+<div id="8571b532" class="cell" data-execution_count="29">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> ADAM_f_list(p: <span class="bu">tuple</span>[<span class="bu">float</span>, <span class="bu">float</span>], n: <span class="bu">int</span>, e: <span class="bu">float</span>, rh1: <span class="bu">float</span>, rh2: <span class="bu">float</span>, de: <span class="bu">float</span>):</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>    pontos <span class="op">=</span> [p]</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> gradf(x1, x2):</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> [<span class="dv">4</span><span class="op">*</span>x1<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">-</span> <span class="dv">40</span><span class="op">*</span>x1 <span class="op">+</span> x2<span class="op">**</span><span class="dv">2</span>,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>                x1<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>x1<span class="op">*</span>x2 <span class="op">+</span> <span class="dv">4</span><span class="op">*</span>x2<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">30</span><span class="op">*</span>x2]</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>    r <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> gradf(pontos[t][<span class="dv">0</span>], pontos[t][<span class="dv">1</span>])</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>        grad_2 <span class="op">=</span> (grad[<span class="dv">0</span>]<span class="op">**</span><span class="dv">2</span>, grad[<span class="dv">1</span>]<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>        r <span class="op">=</span> [r[i]<span class="op">*</span>rh2 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh2)<span class="op">*</span>grad_2[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> [s[i]<span class="op">*</span>rh1 <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>rh1)<span class="op">*</span>grad[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))]</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>        s_hat <span class="op">=</span> [s[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh1<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s))]</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>        r_hat <span class="op">=</span> [r[i] <span class="op">/</span> (<span class="dv">1</span><span class="op">-</span>rh2<span class="op">**</span>(t<span class="op">+</span><span class="dv">1</span>)) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(r))]</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a>        d <span class="op">=</span> [<span class="op">-</span>(e <span class="op">*</span> s_hat[i]) <span class="op">/</span> (math.sqrt(r_hat[i]) <span class="op">+</span> de) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(s_hat))]</span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a>        pd <span class="op">=</span> (pontos[t][<span class="dv">0</span>] <span class="op">+</span> d[<span class="dv">0</span>], pontos[t][<span class="dv">1</span>] <span class="op">+</span> d[<span class="dv">1</span>])</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>        pontos.append(pd)</span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pontos</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Agora vamos gerar alguns gráfico comparativos:</p>
+<div id="536b1ca3" class="cell" data-execution_count="30">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ponto_inicial <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>n_passos <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>trajetoria_gd <span class="op">=</span> grad_df_list(<span class="fl">0.001</span>, ponto_inicial, n_passos)</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>trajetoria_momentum <span class="op">=</span> grad_f_mome_list(<span class="fl">0.9</span>, ponto_inicial, n_passos, <span class="fl">0.001</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>trajetoria_rmsprop <span class="op">=</span> grad_f_rmsp_list(ponto_inicial, n_passos, <span class="fl">0.001</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>))</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>trajetoria_adam <span class="op">=</span> ADAM_f_list(ponto_inicial, n_passos, <span class="fl">0.001</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">8</span>))</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)</span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>plt.contourf(X1, X2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>gd_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a>gd_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a>momentum_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a>momentum_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb48-25"><a href="#cb48-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-26"><a href="#cb48-26" aria-hidden="true" tabindex="-1"></a>rmsprop_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb48-27"><a href="#cb48-27" aria-hidden="true" tabindex="-1"></a>rmsprop_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb48-28"><a href="#cb48-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-29"><a href="#cb48-29" aria-hidden="true" tabindex="-1"></a>adam_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb48-30"><a href="#cb48-30" aria-hidden="true" tabindex="-1"></a>adam_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb48-31"><a href="#cb48-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-32"><a href="#cb48-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-33"><a href="#cb48-33" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x, gd_y, <span class="st">'ro-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Gradiente Descendente'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb48-34"><a href="#cb48-34" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x, momentum_y, <span class="st">'bo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Momentum'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb48-35"><a href="#cb48-35" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x, rmsprop_y, <span class="st">'go-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'RMSProp'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb48-36"><a href="#cb48-36" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x, adam_y, <span class="st">'mo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'ADAM'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb48-37"><a href="#cb48-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-38"><a href="#cb48-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-39"><a href="#cb48-39" aria-hidden="true" tabindex="-1"></a>plt.plot(ponto_inicial[<span class="dv">0</span>], ponto_inicial[<span class="dv">1</span>], <span class="st">'k*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Ponto Inicial'</span>)</span>
+<span id="cb48-40"><a href="#cb48-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-41"><a href="#cb48-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-42"><a href="#cb48-42" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x[<span class="op">-</span><span class="dv">1</span>], gd_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'rs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'red'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb48-43"><a href="#cb48-43" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x[<span class="op">-</span><span class="dv">1</span>], momentum_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'bs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'blue'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb48-44"><a href="#cb48-44" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x[<span class="op">-</span><span class="dv">1</span>], rmsprop_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'gs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'green'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb48-45"><a href="#cb48-45" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x[<span class="op">-</span><span class="dv">1</span>], adam_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'ms'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'magenta'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb48-46"><a href="#cb48-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-47"><a href="#cb48-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb48-48"><a href="#cb48-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb48-49"><a href="#cb48-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparação 1 dos Métodos de Otimização - Trajetórias'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb48-50"><a href="#cb48-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb48-51"><a href="#cb48-51" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb48-52"><a href="#cb48-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-31-output-1.png" width="911" height="825" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cc59d27b" class="cell" data-execution_count="31">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>ponto_inicial <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>n_passos <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>trajetoria_gd <span class="op">=</span> grad_df_list(<span class="fl">0.001</span>, ponto_inicial, n_passos)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>trajetoria_momentum <span class="op">=</span> grad_f_mome_list(<span class="fl">0.9</span>, ponto_inicial, n_passos, <span class="fl">0.001</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>trajetoria_rmsprop <span class="op">=</span> grad_f_rmsp_list(ponto_inicial, n_passos, <span class="fl">0.001</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>))</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>trajetoria_adam <span class="op">=</span> ADAM_f_list(ponto_inicial, n_passos, <span class="fl">0.001</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">8</span>))</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a>plt.contourf(X1, X2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>gd_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a>gd_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a>momentum_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a>momentum_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a>rmsprop_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a>rmsprop_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>adam_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>adam_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x, gd_y, <span class="st">'ro-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Gradiente Descendente'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x, momentum_y, <span class="st">'bo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Momentum'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x, rmsprop_y, <span class="st">'go-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'RMSProp'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x, adam_y, <span class="st">'mo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'ADAM'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>plt.plot(ponto_inicial[<span class="dv">0</span>], ponto_inicial[<span class="dv">1</span>], <span class="st">'k*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Ponto Inicial'</span>)</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x[<span class="op">-</span><span class="dv">1</span>], gd_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'rs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'red'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x[<span class="op">-</span><span class="dv">1</span>], momentum_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'bs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'blue'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x[<span class="op">-</span><span class="dv">1</span>], rmsprop_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'gs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'green'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x[<span class="op">-</span><span class="dv">1</span>], adam_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'ms'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'magenta'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparação 2 dos Métodos de Otimização - Trajetórias'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-32-output-1.png" width="911" height="825" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="295d9dab" class="cell" data-execution_count="32">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>ponto_inicial <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>n_passos <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>trajetoria_gd <span class="op">=</span> grad_df_list(<span class="fl">0.01</span>, ponto_inicial, n_passos)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>trajetoria_momentum <span class="op">=</span> grad_f_mome_list(<span class="fl">0.9</span>, ponto_inicial, n_passos, <span class="fl">0.01</span>)</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>trajetoria_rmsprop <span class="op">=</span> grad_f_rmsp_list(ponto_inicial, n_passos, <span class="fl">0.01</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>))</span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>trajetoria_adam <span class="op">=</span> ADAM_f_list(ponto_inicial, n_passos, <span class="fl">0.01</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">8</span>))</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)</span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a>plt.contourf(X1, X2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>gd_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>gd_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>momentum_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>momentum_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>rmsprop_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb50-27"><a href="#cb50-27" aria-hidden="true" tabindex="-1"></a>rmsprop_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb50-28"><a href="#cb50-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-29"><a href="#cb50-29" aria-hidden="true" tabindex="-1"></a>adam_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb50-30"><a href="#cb50-30" aria-hidden="true" tabindex="-1"></a>adam_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb50-31"><a href="#cb50-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-32"><a href="#cb50-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-33"><a href="#cb50-33" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x, gd_y, <span class="st">'ro-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Gradiente Descendente'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb50-34"><a href="#cb50-34" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x, momentum_y, <span class="st">'bo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Momentum'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb50-35"><a href="#cb50-35" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x, rmsprop_y, <span class="st">'go-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'RMSProp'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb50-36"><a href="#cb50-36" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x, adam_y, <span class="st">'mo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'ADAM'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb50-37"><a href="#cb50-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-38"><a href="#cb50-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-39"><a href="#cb50-39" aria-hidden="true" tabindex="-1"></a>plt.plot(ponto_inicial[<span class="dv">0</span>], ponto_inicial[<span class="dv">1</span>], <span class="st">'k*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Ponto Inicial'</span>)</span>
+<span id="cb50-40"><a href="#cb50-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-41"><a href="#cb50-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-42"><a href="#cb50-42" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x[<span class="op">-</span><span class="dv">1</span>], gd_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'rs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'red'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb50-43"><a href="#cb50-43" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x[<span class="op">-</span><span class="dv">1</span>], momentum_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'bs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'blue'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb50-44"><a href="#cb50-44" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x[<span class="op">-</span><span class="dv">1</span>], rmsprop_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'gs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'green'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb50-45"><a href="#cb50-45" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x[<span class="op">-</span><span class="dv">1</span>], adam_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'ms'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'magenta'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb50-46"><a href="#cb50-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-47"><a href="#cb50-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb50-48"><a href="#cb50-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb50-49"><a href="#cb50-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparação 3 dos Métodos de Otimização - Trajetórias'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb50-50"><a href="#cb50-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb50-51"><a href="#cb50-51" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb50-52"><a href="#cb50-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-33-output-1.png" width="911" height="825" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="c21e512c" class="cell" data-execution_count="33">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>ponto_inicial <span class="op">=</span> (<span class="dv">0</span>,<span class="dv">5</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>n_passos <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>trajetoria_gd <span class="op">=</span> grad_df_list(<span class="fl">0.0001</span>, ponto_inicial, <span class="dv">2000</span>)</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>trajetoria_momentum <span class="op">=</span> grad_f_mome_list(<span class="fl">0.9</span>, ponto_inicial, n_passos, <span class="fl">0.001</span>)</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>trajetoria_rmsprop <span class="op">=</span> grad_f_rmsp_list(ponto_inicial, n_passos, <span class="fl">0.05</span>, <span class="fl">0.9</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">7</span>))</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>trajetoria_adam <span class="op">=</span> ADAM_f_list(ponto_inicial, <span class="dv">85</span>, <span class="fl">0.91</span>, <span class="fl">0.9</span>, <span class="fl">0.999</span>, math.<span class="bu">pow</span>(<span class="dv">10</span>, <span class="op">-</span><span class="dv">8</span>))</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>plt.style.use(<span class="st">"ggplot"</span>)</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"axes"</span>, facecolor<span class="op">=</span><span class="st">"#fafafa"</span>, grid<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>plt.rc(<span class="st">"grid"</span>, color<span class="op">=</span><span class="st">"#f0f0f0"</span>)</span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">10</span>))</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>plt.contourf(X1, X2, Z, <span class="dv">30</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>gd_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a>gd_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_gd]</span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a>momentum_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>momentum_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_momentum]</span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a>rmsprop_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a>rmsprop_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_rmsprop]</span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a>adam_x <span class="op">=</span> [p[<span class="dv">0</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>adam_y <span class="op">=</span> [p[<span class="dv">1</span>] <span class="cf">for</span> p <span class="kw">in</span> trajetoria_adam]</span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x, gd_y, <span class="st">'ro-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Gradiente Descendente'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x, momentum_y, <span class="st">'bo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'Momentum'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x, rmsprop_y, <span class="st">'go-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'RMSProp'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x, adam_y, <span class="st">'mo-'</span>, markersize<span class="op">=</span><span class="dv">3</span>, linewidth<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="st">'ADAM'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb51-37"><a href="#cb51-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-38"><a href="#cb51-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a>plt.plot(ponto_inicial[<span class="dv">0</span>], ponto_inicial[<span class="dv">1</span>], <span class="st">'k*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Ponto Inicial'</span>)</span>
+<span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-41"><a href="#cb51-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a>plt.plot(gd_x[<span class="op">-</span><span class="dv">1</span>], gd_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'rs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'red'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a>plt.plot(momentum_x[<span class="op">-</span><span class="dv">1</span>], momentum_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'bs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'blue'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a>plt.plot(rmsprop_x[<span class="op">-</span><span class="dv">1</span>], rmsprop_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'gs'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'green'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>plt.plot(adam_x[<span class="op">-</span><span class="dv">1</span>], adam_y[<span class="op">-</span><span class="dv">1</span>], <span class="st">'ms'</span>, markersize<span class="op">=</span><span class="dv">8</span>, markeredgecolor<span class="op">=</span><span class="st">'magenta'</span>, markerfacecolor<span class="op">=</span><span class="st">'none'</span>)</span>
+<span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-47"><a href="#cb51-47" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'$x_1$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'$x_2$'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb51-49"><a href="#cb51-49" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparação 4 Métodos de Otimização - Trajetórias'</span>, fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb51-50"><a href="#cb51-50" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lista_1_RebecaChuffi_files/figure-html/cell-34-output-1.png" width="911" height="825" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Na <strong>COMPARACAO 1</strong>, considerando apenas <span class="math inline">\(100\)</span> passos com taxa de aprendizado <span class="math inline">\(0.001\)</span> observamos que Adam e RMSProp não conseguiram se movimentar e o Gradiente Descendente chegou a um mínimo local.</p>
+<p>Na <strong>COMPARACAO 2</strong>, aumentamos o número de passos para <span class="math inline">\(2000\)</span> com taxa de aprendizado <span class="math inline">\(0.001\)</span> e conseguimos com que Adam e RMSProp se aproximassem de um mínimo (apesar de local).</p>
+<p>Já na <strong>COMPARACAO 3</strong>, ao tentar aumentar a taxa para <span class="math inline">\(0.01\)</span>, ainda considerando <span class="math inline">\(2000\)</span> passos, fizemos com que o Momentum desviasse do mínimo global (no qual ele estava finalizando anteriormente) e fosse parar num mínimo local. Após fazer várias e várias horas tentando o fazer o Adam chegar ao mínimo global partindo do ponto <span class="math inline">\((0,5)\)</span> não achei uma combinação de parâmetros que me levasse ao objetivo. Depois comecei a pensar que as caracteríticas do “terreno” da função estavam atrapalhando e que ele estava caindo num mínimo local em quase todos as taxas de aprendizagem. Eu tinha tentado valores maiores de taxa, mas não tão grandes. É possível notar que você tem que “pular” o mínimo local (com um passo relativamente grande) para evitar essa região superior esquerda. Tentei primeiro taxa igual a <span class="math inline">\(1\)</span>, e para minha surpresa, o mínimo global foi atingido considerando <span class="math inline">\(100\)</span> passos (com o passo maior ele conseguiu explorar melhor o espaço inicialmente e a medida que foi chegando perto do mínimo, o tamanho do passo inicial não era relevante, ou seja, os pontos não ficariam interpolando). Tentei melhorar ao máximo essa marca, e cheguei nos seguintes parâmetros (<strong>COMPARACAO 4</strong>):</p>
+<strong>Adam</strong>
+<p>Além disso, no caso abaixo gradiente simples com momento apresentou um resultado satisfatório chegando no mínimo global com uma taxa de aprendizado menor e considerando <span class="math inline">\(100\)</span> passados</p>
+<p><strong>Gradiente com Momentum</strong></p>
+<p>Concluímos que, além do método utilizado, os parâmetros devem ser pensados com atenção considerando a característica de cada função. Nesse caso particular tivemos que “saltar” um mínimo local para chegar no global usando Adam e isso só foi possível após uma análise minuciosa acompanhada da curiosidade pela situação em si.</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

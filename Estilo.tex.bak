@@ -1,0 +1,22 @@
+\usepackage{titlesec, pdfpages, spverbatim, fancyvrb, fvextra, caption, color,  subfig,  
+graphicx,  epstopdf,  enumitem, xcolor, amsmath, amssymb, amsfonts, bm}
+% \usepackage[pages=some]{background}
+% \usepackage{setspace, float}
+\usepackage[portuguese,provide=*]{babel}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+
+
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries\center}{}{0pt}{\Huge}
+\titlespacing*{\chapter}
+  {0pt}{0pt}{40pt}
+
+\newcommand{\red}[1]{\textcolor{red}{{#1}}}
+\newcommand{\blue}[1]{\textcolor{blue}{{#1}}}
+
+
+\newcommand{\bfx}{\bm{x}} % define atalho
