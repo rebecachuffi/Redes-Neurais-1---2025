@@ -1,0 +1,76 @@
+cd "C:\Users\Rebeca\Desktop\UnB 22025\Redes Neurais 2025"
+quarto render "Lista_3_RebecaChuffi.qmd"
+quarto render "Lista_2_RebecaChuffi.qmd" --to pdf
+
+
+
+quarto render nome_do_arquivo.qmd
+quarto render "Lista_2_RebecaChuffi.qmd" --to pdf
+
+
+\section*{Função de estudo}
+Considere a função
+\begin{equation}
+f(x_1, x_2) = x_1^4 + x_2^4 + x_1^2 x_2 + x_1 x_2^2 - 20x_1^2 - 15x_2^2
+\label{eq:funcao}
+\end{equation}
+para responder os itens a seguir.
+
+djpo cglv pcsd qntb
+social@idl.gg
+cbolao@idl.gg
+CBOLÃO - Comunicado sobre adiamento
+noreply@idl.gg
+rpkc xfan hkgf lijn
+
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anúncio CBOLÃO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .footer {
+            margin-top: 20px;
+            color: #666666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        Salve, <NOME>! IDL aqui!
+    </div>
+    
+    <p>
+        Passando aqui pra contar um recado importante: infelizmente o CBOLÃO precisará ser <strong>adiado</strong>. Estamos aguardando as permissões e autorizações necessárias para que possamos realizar o evento do tamanho que o CBOLÃO merece. Esse processo está demorando um pouco, então preferimos adiar para garantir a segurança de todos e termos o melhor CBOLÃO possível.
+    </p>
+    
+    <p>
+        Mas pode ficar tranquilo: estamos correndo atrás de tudo para que possamos realizar o CBOLÃO presencialmente e possamos divulgar a data o quanto antes.
+    </p>
+    
+    <p>
+        Agradecemos demais a compreensão, o carinho e a paciência de vocês. Pra continuar acompanhando as novidades, sigam o perfil oficial do CBOLÃO: <strong>@cbolaogg</strong> no X (antigo Twitter) e fiquem de olho nas nossas redes e lives.
+    </p>
+    
+    <div>
+        Obrigado por continuarem conosco 🙏
+    </div>
+    
+    <div class="footer">
+        Este e-mail não recebe respostas. Para eventuais dúvidas, favor entrar em contato pelas redes sociais do CBOLÃO ou Ilha das Lendas.
+    </div>
+</body>
+</html>

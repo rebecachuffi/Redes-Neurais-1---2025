@@ -1,0 +1,94 @@
+---
+title: 'Lista 3: Avaliando a rede neural'
+subtitle: ""
+author: "Rebeca Chuffi Saccochi"
+date: ""
+output:
+  html_document:
+    number_sections: true
+  pdf_document:
+    latex_engine: pdflatex
+    fig_caption: true
+    toc: true
+    toc_depth: 2
+    fig_width: 10
+    fig_height: 7  
+    keep_tex: true
+    number_sections: true
+    highlight: tango
+    includes:
+      in_header: "Estilo.tex"
+    extra_dependencies: ["fvextra"]  
+    geometry: [a4paper, left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]
+classoption: a4paper
+always_allow_html: false
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+```{=tex}
+\begin{center}
+ {\Large
+  DEPARTAMENTO DE ESTATÍSTICA} \\
+ \vspace{0.5cm}
+   \begin{figure}[!t]
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{logo-UnB.eps}
+   \end{figure}
+ \vskip 1em
+ {\large
+  27 de outubro de 2025}
+ \vskip 1em
+  {\Large
+ Prof. Guilherme Rodrigues} \\
+  \vskip 1em
+ {\Large
+ Redes Neurais Profundas} \\
+  \vskip 1em
+ {\Large
+ Tópicos especiais em Estatística 1} \\
+\end{center}
+
+ \vskip 1em
+
+```
+
+
+\newpage
+
+## Bibliotecas
+\section*{Bibliotecas}
+
+```{python setup, include=FALSE}
+# Blibliotecas Python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import sympy as sp
+import math
+import time
+
+from scipy.optimize import minimize
+```
+
+## Contexto
+\section{Contexto}
+
+Continuando o que foi feito na lista anterior (Lista 2), o objetivo é de avaliação da rede neural criada. Para isso, vamos modificar um pouco as funções desenvolvidas anteriormente de modo a aprender maneira mais eficientes computacionalmente. 
+
+Novamente, considere o conjunto de dados gerado na **Lista 2**:
+
+![Esperança condicional de Y](fig1.png){#fig-medias}
+
+O código a seguir simula $m=100.000$ observações desse processo (o arquivo foi gerado de maneira externa): 
+
+```{python carregar-dados, include=FALSE}
+
+# Carregar os dados gerados no R
+dados = pd.read_csv('dados.csv')
+
+print(f"Dados carregados: {len(dados)} observações")
+print(dados.head())
+```

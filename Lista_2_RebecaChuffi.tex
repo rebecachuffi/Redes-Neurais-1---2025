@@ -1,0 +1,1401 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  a4paper]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Lista 2: Ajustando uma RNA},
+  pdfauthor={Rebeca Chuffi Saccochi},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Lista 2: Ajustando uma RNA}
+\author{Rebeca Chuffi Saccochi}
+\date{}
+\begin{document}
+\maketitle
+
+
+\begin{center}
+ {\Large
+  DEPARTAMENTO DE ESTATÍSTICA} \\
+ \vspace{0.5cm}
+   \begin{figure}[!t]
+    \centering
+    \includegraphics[width=9cm, keepaspectratio]{logo-UnB.eps}
+   \end{figure}
+ \vskip 1em
+ {\large
+  27 de outubro de 2025}
+ \vskip 1em
+  {\Large
+ Prof. Guilherme Rodrigues} \\
+  \vskip 1em
+ {\Large
+ Redes Neurais Profundas} \\
+  \vskip 1em
+ {\Large
+ Tópicos especiais em Estatística 1} \\
+\end{center}
+
+ \vskip 1em
+
+\newpage
+
+\subsection{Observações Iniciais}\label{observauxe7uxf5es-iniciais}
+
+\section*{Observações Iniciais}
+
+Como sugerido, vamos gerar os pontos em \textbf{R}, salvar o arquivo e
+desenvolver o trabalho em \textbf{Python}.
+
+\subsection{Bibliotecas}\label{bibliotecas}
+
+\section*{Bibliotecas}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Blibliotecas Python}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ sympy }\ImportTok{as}\NormalTok{ sp}
+\ImportTok{import}\NormalTok{ math}
+\ImportTok{import}\NormalTok{ time}
+
+\ImportTok{from}\NormalTok{ scipy.optimize }\ImportTok{import}\NormalTok{ minimize}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Contexto}\label{contexto}
+
+\section{Contexto}
+
+Considere um processo gerador de dados da forma \begin{align*}
+Y & \sim N(\mu, \sigma^2=1) \\
+\mu & = |X_1^3 - 30 \text{sen} (X_2) + 10| \\
+X_j & \sim \text{Uniforme}(-3, 3), \quad j=1, 2.
+\end{align*}
+
+Nesse modelo (que iremos considerar como o ``\textbf{modelo real}''), a
+esperança condicional de \(Y\) é dada por
+\(E(Y|X_1, X_2) = |X_1^3 - 30 \text{sen} (X_2) + 10|\). A superfície
+tridimensional \((E(Y|X_1, X_2), X_1, X_2)\) está representada em duas
+dimensões cartesianas na Figura 1.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#\# Figura 1: Gerando o gráfico da superfície}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{x1 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{length.out=}\NormalTok{n)}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, }\AttributeTok{length.out=}\NormalTok{n)}
+\NormalTok{dados.grid }\OtherTok{\textless{}{-}} \FunctionTok{as\_tibble}\NormalTok{(}\FunctionTok{expand.grid}\NormalTok{(x1, x2)) }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{rename\_all}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \FunctionTok{c}\NormalTok{(}\StringTok{"x1"}\NormalTok{, }\StringTok{"x2"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{mutate}\NormalTok{(}\AttributeTok{mu=}\FunctionTok{abs}\NormalTok{(x1ˆ3 }\SpecialCharTok{{-}} \DecValTok{30}\SpecialCharTok{*}\FunctionTok{sin}\NormalTok{(x2) }\SpecialCharTok{+} \DecValTok{10}\NormalTok{))}
+\FunctionTok{ggplot}\NormalTok{(dados.grid, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{x1, }\AttributeTok{y=}\NormalTok{x2)) }\SpecialCharTok{+}
+\FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{colour=}\NormalTok{mu), }\AttributeTok{size=}\DecValTok{2}\NormalTok{, }\AttributeTok{shape=}\DecValTok{15}\NormalTok{) }\SpecialCharTok{+}
+\FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{expand=}\NormalTok{F) }\SpecialCharTok{+}
+\FunctionTok{scale\_colour\_gradient}\NormalTok{(}\AttributeTok{low=}\StringTok{"white"}\NormalTok{,}
+\AttributeTok{high=}\StringTok{"black"}\NormalTok{,}
+\AttributeTok{name=}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$E(Y|X\_1, X\_2)$"}\NormalTok{)) }\SpecialCharTok{+}
+\FunctionTok{xlab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_1$"}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{ylab}\NormalTok{(}\FunctionTok{TeX}\NormalTok{(}\StringTok{"$X\_2$"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{fig1.png}}
+
+}
+
+\caption{\label{fig-medias}Esperança condicional de Y}
+
+\end{figure}%
+
+O código a seguir simula \(m=100.000\) observações desse processo (o
+arquivo foi gerado de maneira externa):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Carregar os dados gerados no R}
+\NormalTok{dados }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{\textquotesingle{}dados.csv\textquotesingle{}}\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Dados carregados: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(dados)}\SpecialCharTok{\}}\SpecialStringTok{ observações"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(dados.head())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Dados carregados: 100000 observações
+     x1.obs    x2.obs         mu          y
+0  1.363870 -0.833639  34.748472  35.120982
+1  1.960455  0.463564   4.120608   4.331141
+2 -1.848304  0.110323   0.382789   0.596088
+3 -2.036404 -2.115443  27.214465  27.625098
+4  1.812387 -1.917255  44.170668  43.690597
+\end{verbatim}
+
+Nesta lista estamos interessados em estimar o modelo acima usando uma
+rede neural simples, ajustada sobre os dados simulados. Precisamente,
+queremos construir uma rede neural com apenas uma camada escondida
+contendo dois neurônios.
+
+\begin{figure}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{fig2.png}}
+
+}
+
+\caption{\label{fig-medias}Arquitetura RNA}
+
+\end{figure}%
+
+\vspace{.6cm}
+
+Matematicamente, a rede é descrita pelas seguintes equações:
+\begin{align*}
+f_{0, 1} & = x_1  w_1 + x_2 w_2 + b_1 \\
+f_{0, 2} & = x_1  w_3 + x_2 w_4 + b_2 \\
+h_{1, 1} & = a(f_{0, 1}) \\
+h_{1, 2} & = a(f_{0, 2}) \\
+f_{1, 1} & = h_{1, 1} w_5 + h_{1, 2} w_6 + b_3 \\
+\hat{y} & = h_{2, 1} = f_{1, 1},  
+\end{align*} onde \(a(x) = \frac{1}{1+e^{-x}}\) representa a função de
+ativação logística (sigmoide).
+
+Adotaremos como função de perda o erro quadrático médio, expresso por:
+\[
+J(\phi) = \frac{1}{m} \sum_{i=1}^m L(f(x_{1i}, x_{2i}; \phi), y_i) = \frac{1}{m} \sum_{i=1}^m (y_i - \hat{y}_i)^2,
+\] onde \(x_{ji}\) representa a j-ésima covariável (\textit{feature}) da
+i-ésima observação, \(\phi = (w_1, \ldots, w_6, b_1, b_2, b_3)\) é o
+vetor de pesos e viéses (parâmetros) e, pela definição da rede,
+\[f(x_{1i}, x_{2i}; \phi)=\hat{y}_i=a(x_{1i}  w_1 + x_{2i} w_2 + b_1) w_5 + a(x_{1i}  w_3 + x_{2i} w_4 + b_2) w_6 + b_3.\]
+Uma representação gráfica da rede está apresentada na figura acima.
+\textbf{Observação importante:} mudei a ordem dos pesos para que ficasse
+congruente com a notação matricial abaixo.
+
+Em notação matricial, a rede neural pode ser descrita por \begin{align*}
+\mathbf{f}_0 & = \mathbf{\Omega}_0 \mathbf{x} + \mathbf{\beta}_0 \\
+\mathbf{h}_1 & = \mathbf{a}(\mathbf{f}_0)  \\
+f_1 & = \mathbf{\Omega}_1 \mathbf{h}_1 + \beta_1 \\
+\hat{y} & = h_2 = f_1,  
+\end{align*} onde \begin{equation*}
+\mathbf{x} = \mathbf{h}_0 = \begin{pmatrix}
+x_1  \\
+x_2  
+\end{pmatrix}, \;
+\mathbf{\Omega}_0  = \begin{pmatrix}
+w_1 & w_2 \\
+w_3 & w_4 
+\end{pmatrix}, \; 
+\mathbf{\beta}_0 = \begin{pmatrix}
+b_1  \\
+b_2  
+\end{pmatrix}, \;
+\mathbf{f}_0 = \begin{pmatrix}
+f_{0, 1}  \\
+f_{0, 2}  
+\end{pmatrix}, \;
+\mathbf{h}_1 = \begin{pmatrix}
+h_{1, 1}  \\
+h_{1, 2} 
+\end{pmatrix}, \;
+\mathbf{\Omega}_1  = \begin{pmatrix}
+w_5 & w_6  
+\end{pmatrix}, \;
+\beta_1 = b_3 \quad \text{e} 
+\end{equation*} \begin{equation*}
+\Phi = \{\Omega = \{\mathbf{\Omega}_0, \mathbf{\Omega}_1\},  \beta = \{\mathbf{\beta}_0, \beta_1\}\}.
+\end{equation*}
+
+\subsection{Início do projeto}\label{inuxedcio-do-projeto}
+
+\section{Início do projeto}
+
+\subsubsection{A. Criando função computacional para prever
+y}\label{a.-criando-funuxe7uxe3o-computacional-para-prever-y}
+
+\subsection{A. Criando função computacional para prever y}
+
+Considerando a estrutura previamente citada, vamos criar uma função
+computacional para calcular \(\hat{y}=f(\mathbf{x}; \mathbf{\phi})\) em
+função de \(\mathbf{x}\) e \(\mathbf{\Phi}\). Vamos usar a função para
+calcular \(\hat{y}\) para os parâmetros abaixo
+
+\vspace{.6cm}
+
+\begin{equation*}
+\mathbf{\Phi}^\star = \left\{ 
+\mathbf{\Omega} = \left\{
+\mathbf{\Omega}_0 = 
+  \begin{pmatrix}
+  0.1 & 0.1 \\
+  0.1 & 0.1
+  \end{pmatrix}, 
+\mathbf{\Omega}_1  = 
+  \begin{pmatrix}
+  0.1 & 0.1  
+  \end{pmatrix} \right\}, 
+\mathbf{\beta} = \left\{
+\mathbf{\beta}_0 = 
+  \begin{pmatrix}
+  0.1 \\ 0.1  
+  \end{pmatrix}, 
+\mathbf{\beta}_1 = 0.1 \right\}
+\right\}
+\; \text{e} \; \mathbf{x}=\begin{pmatrix} 2 \\ 1 \end{pmatrix}.
+\end{equation*}
+
+Vamos utilizar a estrutura matricial para a criação da função
+\(\mathbf{x}\) e \(\mathbf{\Phi}\). A entrada da função será o vetor
+\(\mathbf{x}\), de duas dimensões, e o vetor de parâmetros
+\(\mathbf{\phi} = (\omega_1,\omega_2, \omega_3, \omega_4,\omega_5,\omega_6,  b_1, b_2, b_3)\)
+(que transformaremos em forma matricial dentro da função, por
+simplicidade de entrada).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#definindo a função considerando exatamente o formato de entrada}
+\KeywordTok{def}\NormalTok{ predict\_y(x: np.ndarray,  }\CommentTok{\# formato (2,)}
+\NormalTok{              phi: np.ndarray  }\CommentTok{\# formato (9,)}
+\NormalTok{             ) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{float}\NormalTok{:}
+    \CommentTok{"""}
+\CommentTok{    x:[x1, x2] {-} entrada da rede}
+\CommentTok{    phi:[w1, w2, w3, w4, w5, w6, b1, b2, b3] {-} parâmetros da rede}
+\CommentTok{    """}
+
+\NormalTok{    w1, w2, w3, w4, w5, w6, b1, b2, b3 }\OperatorTok{=}\NormalTok{ phi}
+\NormalTok{    x }\OperatorTok{=}\NormalTok{ np.array(x).reshape(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{) }\CommentTok{\#precisamos de um vetor seja coluna para que a multiplicação matricial funcione}
+
+    \CommentTok{\# Construir matrizes}
+\NormalTok{    W0 }\OperatorTok{=}\NormalTok{ np.array([[w1, w2],   }
+\NormalTok{                   [w3, w4]]) }
+\NormalTok{    b0 }\OperatorTok{=}\NormalTok{ np.array([[b1],       }
+\NormalTok{                   [b2]])   }
+\NormalTok{    W1 }\OperatorTok{=}\NormalTok{ np.array([[w5, w6]])}
+\NormalTok{    b1\_a }\OperatorTok{=}\NormalTok{ np.array([[b3]])}
+
+    \CommentTok{\#Inicio do cálculo matricial}
+\NormalTok{    f0 }\OperatorTok{=}\NormalTok{ b0 }\OperatorTok{+}\NormalTok{ np.dot(W0,x)  }\CommentTok{\#np.dot é usado para multiplicação matricial}
+\NormalTok{    h1 }\OperatorTok{=} \DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{np.exp(}\OperatorTok{{-}}\NormalTok{f0)) }\CommentTok{\#aplica sigmoide elemento a elemento}
+\NormalTok{    f1 }\OperatorTok{=}\NormalTok{ b1\_a }\OperatorTok{+}\NormalTok{ np.dot(W1,h1)}
+\NormalTok{    y\_p }\OperatorTok{=}\NormalTok{ f1[}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{] }\CommentTok{\#retornar o float (entrada) e não a matriz}
+    \ControlFlowTok{return}\NormalTok{ y\_p}
+\end{Highlighting}
+\end{Shaded}
+
+Algumas observações sobre a função acima:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Decidimos colocar uma função que recebe dois vetores
+  (\(x\in \mathbb{R}^2\) e \(\phi\in \mathbb{R}^9\)) pela simplicidade
+  no input.
+\item
+  Dentro da função transformaremos esses vetores em matrizes
+  \(\Omega_0\in \textnormal{M}(\mathbb{R})_{2\times 2}\),
+  \(\Omega_1\in \textnormal{M}(\mathbb{R})_{2\times 1}\),
+  \(\beta_0\in \textnormal{M}(\mathbb{R})_{1\times 2}\) e
+  \(\beta_1\in \textnormal{M}(\mathbb{R})_{1\times 1}\).
+\item
+  Modificamos o formato do \(\mathbf{x}\) para que ele seja um vetor
+  coluna e dessa forma a multiplicação matricial esteja bem definida.
+\item
+  Ao definir \(h_1\) note que a função é aplicada elemento a elemento e
+  portanto a saída é (novamente) uma matriz.
+\item
+  A predição de \(y\) é exatamente o \(f_1\), que é uma matriz em
+  \(\textnormal{M}(\mathbb{R})_{1\times 1}\). Como precisamos que o
+  output seja um número (float), usamos \({f_1}[0,0]\) para selecionar a
+  primeira (e única) entrada da matriz.
+\end{enumerate}
+
+Agora vamos testar a função nos parâmetros mencionados, ou seja:
+
+\(\mathbf{\phi} = (\omega_1,\omega_2, \omega_3, \omega_4,\omega_5,\omega_6, b_1, b_2, b_3) = (0.1,0.1, 0.1, 0.1,0.1,0.1, 0.1, 0.1, 0.1)\)
+
+\(x = (2,1)\)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ (}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+
+\NormalTok{res }\OperatorTok{=}\NormalTok{ predict\_y(x,phi)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"ŷ = }\SpecialCharTok{\{}\NormalTok{res}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ŷ = 0.2197
+\end{verbatim}
+
+\vspace{.4cm}
+
+\subsubsection{B. Função computacional para calcular a função de
+perda}\label{b.-funuxe7uxe3o-computacional-para-calcular-a-funuxe7uxe3o-de-perda}
+
+\subsection{B. Função computacional para calcular a função de perda}
+
+Agora vamos criar uma função computacional para calcular a função de
+perda \(J(\mathbf{\phi})\). Lembre que, algebricamente, a função de
+perda foi definida com o erro médio quadrático (pois os dados tem
+distribuição normal):
+
+\[
+J(\phi) = \frac{1}{m} \sum_{i=1}^m L(f(x_{1i}, x_{2i}; \phi), y_i) = \frac{1}{m} \sum_{i=1}^m (y_i - \hat{y}_i)^2
+\]
+
+Temos duas maneiras de calcular a função de perda. A primeira não é
+100\% vetorizada pois a função \(\texttt{predict\_y}\) retorna um ponto
+(pois a entrada é pontual). Logo, a primeira maneira é a seguinte:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ loss(X: pd.DataFrame, phi: np.ndarray) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{float}\NormalTok{: }
+\NormalTok{    x1 }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{]}
+\NormalTok{    x2 }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]}
+\NormalTok{    y }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{] }\CommentTok{\#array}
+
+\NormalTok{    y\_p }\OperatorTok{=}\NormalTok{ np.array([predict\_y(np.array([x1\_i, x2\_i]), phi) }
+                   \ControlFlowTok{for}\NormalTok{ x1\_i, x2\_i }\KeywordTok{in} \BuiltInTok{zip}\NormalTok{(x1, x2)])}
+\NormalTok{    m }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{len}\NormalTok{(X))}
+
+\NormalTok{    erro }\OperatorTok{=}\NormalTok{ y }\OperatorTok{{-}}\NormalTok{ y\_p}
+    \ControlFlowTok{return}\NormalTok{ np.dot(erro, erro) }\OperatorTok{/}\NormalTok{ m}
+\end{Highlighting}
+\end{Shaded}
+
+\vspace{.4cm}
+
+Aqui usamos um método vetorizado, considerando que temos uma quantidade
+grande de dados a serem considerados. Algumas observações sobre o
+código:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\textnormal{np.dot(erro, erro)}\) considera o produto interno de
+  \(y\) com ele mesmo (aqui, considerando \(y\) um vetor de dimensão
+  \(m\), que é o tamanho do dataset em questão). Mais explicitamente,
+  \(y\) é um array 1D: \([y1, y2, y3, ..., y_m]\).
+\item
+  Note que o produto interno já considera a soma do quadrado dos termos,
+  então não precisamos de um loop nessa parte.
+\end{enumerate}
+
+Agora vamos dividir os o conjunto de dados de modo que as
+\textbf{primeiras} 80.000 amostras componham o conjunto de
+\textbf{treinamento}, as próximas 10.000 o de \textbf{validação}, e as
+\textbf{últimas} 10.000 o de \textbf{teste}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train\_set }\OperatorTok{=}\NormalTok{ dados.iloc[:}\DecValTok{80000}\NormalTok{] }
+\NormalTok{validation\_set }\OperatorTok{=}\NormalTok{ dados.iloc[}\DecValTok{80000}\NormalTok{:}\DecValTok{90000}\NormalTok{]}
+\NormalTok{test\_set }\OperatorTok{=}\NormalTok{ dados.iloc[}\DecValTok{90000}\NormalTok{:}\DecValTok{100000}\NormalTok{] }
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Treinamento: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(train\_set)}\SpecialCharTok{\}}\SpecialStringTok{ amostras"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Validação: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(validation\_set)}\SpecialCharTok{\}}\SpecialStringTok{ amostras"}\NormalTok{) }
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Teste: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(test\_set)}\SpecialCharTok{\}}\SpecialStringTok{ amostras"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Total: }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(train\_set) }\OperatorTok{+} \BuiltInTok{len}\NormalTok{(validation\_set) }\OperatorTok{+} \BuiltInTok{len}\NormalTok{(test\_set)}\SpecialCharTok{\}}\SpecialStringTok{ amostras"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Treinamento: 80000 amostras
+Validação: 10000 amostras
+Teste: 10000 amostras
+Total: 100000 amostras
+\end{verbatim}
+
+A perda da rede \textbf{no conjunto de teste} quando \(\phi=\phi^\star\)
+é dada por:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+
+\NormalTok{loss\_t }\OperatorTok{=}\NormalTok{ loss(test\_set, phi)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"A perda no conjunto de teste é dada por }\SpecialCharTok{\{}\NormalTok{loss\_t}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+A perda no conjunto de teste é dada por 663.6629
+\end{verbatim}
+
+Agora, se ajustarmos a função \(\texttt{predict\_y}\) para que ela
+recebe um dataframe e retorne um vetor de predições, conseguimos uma
+função computacionalmente mais eficiente:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#definindo a função considerando exatamente o formato de entrada}
+\KeywordTok{def}\NormalTok{ predict\_y\_vetorizada(X: pd.DataFrame, }\CommentTok{\#esse array deve conter apenas as 2 colunas das features}
+\NormalTok{              phi: np.ndarray  }\CommentTok{\# formato (9,)}
+\NormalTok{             ) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{float}\NormalTok{:}
+    \CommentTok{"""}
+\CommentTok{    x:[x1, x2] {-} entrada da rede}
+\CommentTok{    phi:[w1, w2, w3, w4, w5, w6, b1, b2, b3] {-} parâmetros da rede}
+\CommentTok{    """}
+
+\NormalTok{    w1, w2, w3, w4, w5, w6, b1, b2, b3 }\OperatorTok{=}\NormalTok{ phi}
+\NormalTok{    X\_T }\OperatorTok{=}\NormalTok{ X.T }\CommentTok{\#precisamos de um vetor seja coluna para que a multiplicação matricial funcione}
+
+    \CommentTok{\# Construir matrizes}
+\NormalTok{    W0 }\OperatorTok{=}\NormalTok{ np.array([[w1, w2],   }
+\NormalTok{                   [w3, w4]]) }
+\NormalTok{    b0 }\OperatorTok{=}\NormalTok{ np.array([[b1],       }
+\NormalTok{                   [b2]])   }
+\NormalTok{    W1 }\OperatorTok{=}\NormalTok{ np.array([[w5, w6]])}
+\NormalTok{    b1\_a }\OperatorTok{=}\NormalTok{ np.array([[b3]])}
+
+    \CommentTok{\#Inicio do cálculo matricial}
+\NormalTok{    f0 }\OperatorTok{=}\NormalTok{ b0 }\OperatorTok{+}\NormalTok{ np.dot(W0,X\_T)  }
+\NormalTok{    h1 }\OperatorTok{=} \DecValTok{1}\OperatorTok{/}\NormalTok{(}\DecValTok{1}\OperatorTok{+}\NormalTok{np.exp(}\OperatorTok{{-}}\NormalTok{f0)) }\CommentTok{\#aplica sigmoide elemento a elemento}
+\NormalTok{    f1 }\OperatorTok{=}\NormalTok{ b1\_a }\OperatorTok{+}\NormalTok{ np.dot(W1,h1)}
+\NormalTok{    y\_p }\OperatorTok{=}\NormalTok{ f1.flatten() }\CommentTok{\#achatar para 1D}
+    \ControlFlowTok{return}\NormalTok{ y\_p}
+\end{Highlighting}
+\end{Shaded}
+
+Note que para essa função, o conjunto \(X\) deve ser um array com \(m\)
+linhas e \(2\) colunas (as features) para que as multiplicações
+funcionem corretamente. Dessa forma, o resultado da predição será um
+vetor com \(m\) entradas, uma para cada observação. Utilizando a última
+função de predição, podemos atualizar a função de perda para:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ loss\_vetorizada(X: pd.DataFrame, phi: np.ndarray) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{float}\NormalTok{: }
+\NormalTok{    x1 }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{]}
+\NormalTok{    x2 }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]}
+\NormalTok{    y }\OperatorTok{=}\NormalTok{ X[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values }\CommentTok{\#array}
+
+\NormalTok{    y\_p }\OperatorTok{=}\NormalTok{ predict\_y\_vetorizada(X[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values, phi) }\CommentTok{\#array}
+\NormalTok{    m }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\BuiltInTok{len}\NormalTok{(X))}
+
+\NormalTok{    erro }\OperatorTok{=}\NormalTok{ y }\OperatorTok{{-}}\NormalTok{ y\_p}
+    \ControlFlowTok{return}\NormalTok{ np.dot(erro, erro) }\OperatorTok{/}\NormalTok{ m}
+\end{Highlighting}
+\end{Shaded}
+
+Agora vamos obter a perda \textbf{no conjunto de teste} quando
+\(\phi=\Phi^\star\) comparando o tempo de execução na versão vetorizada
+e na não-vetorizada:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi }\OperatorTok{=}\NormalTok{ (}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{)}
+
+\NormalTok{start }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{loss\_t }\OperatorTok{=}\NormalTok{ loss(test\_set, phi)}
+\NormalTok{end }\OperatorTok{=}\NormalTok{ time.time()}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"A perda no conjunto de teste é dada por }\SpecialCharTok{\{}\NormalTok{loss\_t}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Versão não vetorizada: }\SpecialCharTok{\{}\NormalTok{end }\OperatorTok{{-}}\NormalTok{ start}\SpecialCharTok{:.4f\}}\SpecialStringTok{ segundos"}\NormalTok{)}
+
+\NormalTok{start }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{loss\_t\_v }\OperatorTok{=}\NormalTok{ loss\_vetorizada(test\_set, phi)}
+\NormalTok{end }\OperatorTok{=}\NormalTok{ time.time()}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"A perda no conjunto de teste é dada por }\SpecialCharTok{\{}\NormalTok{loss\_t\_v}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Versão vetorizada: }\SpecialCharTok{\{}\NormalTok{end }\OperatorTok{{-}}\NormalTok{ start}\SpecialCharTok{:.4f\}}\SpecialStringTok{ segundos"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+A perda no conjunto de teste é dada por 663.6629
+Versão não vetorizada: 0.1659 segundos
+A perda no conjunto de teste é dada por 663.6629
+Versão vetorizada: 0.0006 segundos
+\end{verbatim}
+
+\subsubsection{C. Expressão algébrica para o
+gradiente}\label{c.-expressuxe3o-alguxe9brica-para-o-gradiente}
+
+\subsection{C. Expressão algébrica para o gradiente}
+
+Vamos usas a regra da cadeia para encontrar expressões algébricas para o
+vetor gradiente: \[
+\nabla_{\mathbf{\phi}} J(\mathbf{\phi}) = \left(\frac{\partial J}{\partial w_1},
+\ldots, \frac{\partial J}{\partial b_3} \right).
+\]
+
+Lembre que \[
+J(\phi) = \frac{1}{m} \sum_{i=1}^m L(f(x_{1i}, x_{2i}; \phi), y_i) = \frac{1}{m} \sum_{i=1}^m (y_i - \hat{y}_i)^2
+\]
+
+e pela definição da rede
+
+\[
+\hat{y} = f(x_{1}, x_{2}; \phi)=\hat{y}_i=a(x_{1} w_1 + x_{2} w_3 + b_1) w_5 + a(x_{1} w_2 + x_{2} w_4 + b_2) w_6 + b_3.
+\]
+
+onde \(a(z) = \frac{1}{1 + \exp(-z)}\) e
+\(a'(z) = \frac{e^{-z}}{(1 + e^{-z})^2}\).
+
+Para cada amostra temos que a perda é dada por \(L = (\hat{y} - y)^2\)
+(não vamos colocar o \(i\) para não pesar a notação):
+
+Então, pela regra da cadeia, para cada amostra temos:
+
+\begin{aligned}
+\frac{\partial L}{\partial w_1} &= -2(y-\hat{y})\cdot a'(x_{1} w_1 + x_{2} w_2 + b_1)\cdot w_5\cdot x_1 \\
+\frac{\partial L}{\partial w_2} &= -2(y-\hat{y})\cdot a'(x_{1} w_1 + x_{2} w_2 + b_1)\cdot w_5\cdot x_2 \\
+\frac{\partial L}{\partial w_3} &= -2(y-\hat{y})\cdot a'(x_{1} w_3 + x_{2} w_4 + b_2)\cdot w_5\cdot x_1 \\
+\frac{\partial L}{\partial w_4} &= -2(y-\hat{y})\cdot a'(x_{1} w_3 + x_{2} w_4 + b_2)\cdot w_5\cdot x_2 \\
+\frac{\partial L}{\partial w_5} &= -2(y-\hat{y})\cdot a(x_{1} w_1 + x_{2} w_2 + b_1) \\
+\frac{\partial L}{\partial w_6} &= -2(y-\hat{y})\cdot a(x_{1} w_3 + x_{2} w_4 + b_2) \\
+\frac{\partial L}{\partial b_1} &= -2(y-\hat{y})\cdot a'(x_{1} w_1 + x_{2} w_2 + b_1)\cdot w_5 \\
+\frac{\partial L}{\partial b_2} &= -2(y-\hat{y})\cdot a'(x_{1} w_3 + x_{2} w_4 + b_2)\cdot w_6 \\
+\frac{\partial L}{\partial b_3} &= -2(y-\hat{y})
+\end{aligned}
+
+ou seja,
+
+\begin{aligned}
+\frac{\partial L}{\partial w_1} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_1 + x_{2} w_2 + b_1)}}{(1 + e^{-(x_{1} w_1 + x_{2} w_2 + b_1)})^2}\cdot w_5\cdot x_1 \\
+\frac{\partial L}{\partial w_2} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_1 + x_{2} w_2 + b_1)}}{(1 + e^{-(x_{1} w_1 + x_{2} w_2 + b_1)})^2}\cdot w_5\cdot x_2 \\
+\frac{\partial L}{\partial w_3} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_3 + x_{2} w_4 + b_2)}}{(1 + e^{-(x_{1} w_3 + x_{2} w_4 + b_2)})^2}\cdot w_6\cdot x_1 \\
+\frac{\partial L}{\partial w_4} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_3 + x_{2} w_4 + b_2)}}{(1 + e^{-(x_{1} w_3 + x_{2} w_4 + b_2)})^2}\cdot w_6\cdot x_2 \\
+\frac{\partial L}{\partial w_5} &= -2(y-\hat{y})\cdot \frac{1}{1 + e^{-(x_{1} w_1 + x_{2} w_2 + b_1)}} \\ 
+\frac{\partial L}{\partial w_6} &= -2(y-\hat{y})\cdot \frac{1}{1 + e^{-(x_{1} w_3 + x_{2} w_4 + b_2)}} \\ 
+\frac{\partial L}{\partial b_1} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_1 + x_{2} w_2 + b_1)}}{(1 + e^{-(x_{1} w_1 + x_{2} w_2 + b_1)})^2} \cdot w_5 \\
+\frac{\partial L}{\partial b_2} &= -2(y-\hat{y})\cdot \frac{e^{-(x_{1} w_3 + x_{2} w_4 + b_2)}}{(1 + e^{-(x_{1} w_3 + x_{2} w_4 + b_2)})^2} \cdot w_6 \\
+\frac{\partial L}{\partial b_3} &= -2(y-\hat{y})
+\end{aligned}
+
+O gradiente de \(J(\phi)\) é a \textbf{média} dos gradientes
+individuais:
+
+\[
+\nabla J(\phi) = \frac{1}{m} \sum_{i=1}^m \nabla L^{(i)}(\phi)
+\]
+
+Para \textbf{cada parâmetro} em \(\{w_1, w_2, \dots, b_3\}\):
+
+\[
+\frac{\partial J}{\partial \theta} = \frac{1}{m} \sum_{i=1}^m \frac{\partial L^{(i)}}{\partial \theta}
+\]
+
+Por exemplo, explicitamente para \(w_1\):
+
+\[
+\frac{\partial J}{\partial w_1} = \frac{1}{m} \sum_{i=1}^m \left[ -2(y_i - \hat{y}_i) \cdot w_5 \cdot \frac{e^{-z_{1,i}}}{(1 + e^{-z_{1,i}})^2} \cdot x_{1,i} \right]
+\] \vspace{.4cm}
+
+\subsubsection{D. Back Propagation}\label{d.-back-propagation}
+
+\subsection{D. Back Propagation}
+
+Vamos criar uma função computacional que receba como entrada a lista
+\(\mathbf{\phi}\), uma matrix design (\(\mathbf{x}\)) e as respectivas
+observações (\(\mathbf{y}\)) e forneça, como saída, o gradiente definido
+no item c).
+
+Para não realizar a mesma operação múltiplas vezes, vamos utilizar o
+algoritmo \emph{back-propagation}. Lembre que:
+
+Matematicamente, a rede é descrita pelas seguintes equações:
+\begin{align*}
+f_{0, 1} & = x_1  w_1 + x_2 w_2 + b_1 \\
+f_{0, 2} & = x_1  w_3 + x_2 w_4 + b_2 \\
+h_{1, 1} & = a(f_{0, 1}) \\
+h_{1, 2} & = a(f_{0, 2}) \\
+f_{1, 1} & = h_{1, 1} w_5 + h_{1, 2} w_6 + b_3 \\
+\hat{y} & = h_{2, 1} = f_{1, 1},  
+\end{align*} onde \(a(x) = \frac{1}{1+e^{-x}}\) representa a função de
+ativação logística (sigmoide).
+
+Em notação matricial, a rede neural pode ser descrita por \begin{align*}
+\mathbf{f}_0 & = \mathbf{\Omega}_0 \mathbf{x} + \mathbf{\beta}_0 \\
+\mathbf{h}_1 & = \mathbf{a}(\mathbf{f}_0)  \\
+f_1 & = \mathbf{\Omega}_1 \mathbf{h}_1 + \beta_1 \\
+\hat{y} & = h_2 = f_1,  
+\end{align*} onde \begin{equation*}
+\mathbf{x} = \mathbf{h}_0 = \begin{pmatrix}
+x_1  \\
+x_2  
+\end{pmatrix}, \;
+\mathbf{\Omega}_0  = \begin{pmatrix}
+w_1 & w_2 \\
+w_3 & w_4 
+\end{pmatrix}, \; 
+\mathbf{\beta}_0 = \begin{pmatrix}
+b_1  \\
+b_2  
+\end{pmatrix}, \;
+\mathbf{f}_0 = \begin{pmatrix}
+f_{0, 1}  \\
+f_{0, 2}  
+\end{pmatrix}, \;
+\mathbf{h}_1 = \begin{pmatrix}
+h_{1, 1}  \\
+h_{1, 2} 
+\end{pmatrix}, \;
+\mathbf{\Omega}_1  = \begin{pmatrix}
+w_5 & w_6  
+\end{pmatrix}, \;
+\beta_1 = b_3 \quad \text{e} 
+\end{equation*} \begin{equation*}
+\Phi = \{\Omega = \{\mathbf{\Omega}_0, \mathbf{\Omega}_1\},  \beta = \{\mathbf{\beta}_0, \beta_1\}\}.
+\end{equation*}
+
+É possível mostrar que (\emph{Understanting Deep Learning}) se \(L_i\) é
+a função de perda para a observação \(i\), ou seja,
+\(L_i = (\hat{y}_i - y_i)^2\), então as derivadas, considerando a
+notação matricial acima:
+
+\begin{aligned}
+
+\frac{\partial L_i}{\partial \Omega_k} &= \frac{\partial L_i}{\partial f_k}\cdot h_k^T\\
+\frac{\partial L_i}{\partial \beta_k} &= \frac{\partial L_i}{\partial f_k}
+\end{aligned}
+
+e
+
+\begin{aligned}
+
+\frac{\partial h_1}{\partial f_0} = a'(f_0) \\
+\frac{\partial f_1}{\partial h_1} = {\Omega_1}^T
+\end{aligned}
+
+Ou seja, é suficiente calcular \(\frac{\partial L_i}{\partial f_k}\)
+para todo \(k\) (que pode ser calculado de maneira recursiva).
+
+\textbf{Passo inicial considerando a notação simplificada:}
+\[\frac{\partial L_i}{\partial f_1} = \frac{\partial L_i}{\partial \hat{y}} = -2(y-\hat{y})\]
+
+Então,
+
+\begin{aligned}
+\frac{\partial L}{\partial \mathbf{f}_0} &= \left(\Omega_1^T \cdot \frac{\partial L}{\partial f_1}\right) \odot a'(\mathbf{f}_0) \\
+&= \left( \begin{pmatrix} w_5 \\ w_6 \end{pmatrix} \cdot (-2(y - \hat{y})) \right) \odot \begin{pmatrix} a'(f_{01}) \\ a'(f_{02}) \end{pmatrix} \\
+&= \begin{pmatrix} -2w_5(y - \hat{y}) \cdot a'(x_1  w_1 + x_2 w_2 + b_1) \\ -2w_6(y - \hat{y}) \cdot a'(x_1  w_3 + x_2 w_4 + b_2) \end{pmatrix}
+\end{aligned}
+
+Logo:
+
+\begin{aligned}
+\frac{\partial L}{\partial \Omega_0} &= \left[ \left( \Omega_1^T \cdot \frac{\partial L}{\partial \hat{y}} \right) \odot a'(\mathbf{f}_0) \right] \cdot \mathbf{x}^T \\
+&= \begin{pmatrix} -2w_5(y - \hat{y}) \cdot a'(x_1  w_1 + x_2 w_2 + b_1) \\ -2w_6(y - \hat{y}) \cdot a'(x_1  w_3 + x_2 w_4 + b_2) \end{pmatrix} \cdot \begin{pmatrix} x_1 & x_2 \end{pmatrix}\\
+&= \begin{pmatrix}
+-2 w_5 (y - \hat{y}) \cdot a'(f_{0,1}) \cdot x_1 & -2 w_5 (y - \hat{y}) \cdot a'(f_{0,1}) \cdot x_2 \\
+-2 w_6 (y - \hat{y}) \cdot a'(f_{0,2}) \cdot x_1 & -2 w_6 (y - \hat{y}) \cdot a'(f_{0,2}) \cdot x_2
+\end{pmatrix}
+\end{aligned}
+
+e,
+
+\begin{aligned}
+\frac{\partial L}{\partial \Omega_1} &= \frac{\partial L}{\partial \hat{y}} \cdot \mathbf{h}_1^T \\
+&= -2(y - \hat{y}) \cdot \begin{pmatrix} a(f_{0,1}) & a(f_{0,2}) \end{pmatrix} \\
+&= \begin{pmatrix}
+-2(y - \hat{y}) \cdot a(x_1 w_1 + x_2 w_2 + b_1) & -2(y - \hat{y}) \cdot a(x_1 w_3 + x_2 w_4 + b_2)
+\end{pmatrix}
+\end{aligned}
+
+E para os vieses, temos:
+
+\begin{aligned}
+\frac{\partial L}{\partial \beta_1} &= \frac{\partial L}{\partial \hat{y}} \\
+&= -2(y - \hat{y})
+\end{aligned}
+
+e,
+
+\begin{aligned}
+\frac{\partial L}{\partial \beta_0} &= \left( \Omega_1^T \cdot \frac{\partial L}{\partial \hat{y}} \right) \odot a'(\mathbf{f}_0) \\
+&= \begin{pmatrix} -2w_5(y - \hat{y}) \\ -2w_6(y - \hat{y}) \end{pmatrix} \odot \begin{pmatrix} a'(f_{0,1}) \\ a'(f_{0,2}) \end{pmatrix} \\
+&= \begin{pmatrix} -2w_5(y - \hat{y}) \cdot a'(f_{0,1}) \\ -2w_6(y - \hat{y}) \cdot a'(f_{0,2}) \end{pmatrix}
+\end{aligned}
+
+Usando a notação matricial, temos algo consistente com a o vetor
+gradiente encontrado na parte c). Agora que conseguimos entender a
+notação matricial para esse exemplo, vamos montar uma função
+computacional que receba como entrada a lista \(\mathbf{\phi}\), uma
+matrix design (\(\mathbf{x}\)) e as respectivas observações
+(\(\mathbf{y}\)) e forneça, como saída, o gradiente definido no item c).
+
+\textbf{Versão Não-Vetorizada:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ gradiente(X: np.ndarray, y: np.ndarray, phi: np.ndarray) }\OperatorTok{{-}\textgreater{}}\NormalTok{ np.ndarray:}
+\NormalTok{    m }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(X)}
+\NormalTok{    grad\_total }\OperatorTok{=}\NormalTok{ np.zeros(}\DecValTok{9}\NormalTok{)}
+\NormalTok{    w1, w2, w3, w4, w5, w6, b1, b2, b3 }\OperatorTok{=}\NormalTok{ phi}
+    
+\NormalTok{    Omega0 }\OperatorTok{=}\NormalTok{ np.array([[w1, w2], [w3, w4]])}
+\NormalTok{    Omega1 }\OperatorTok{=}\NormalTok{ np.array([[w5, w6]])}
+\NormalTok{    beta0 }\OperatorTok{=}\NormalTok{ np.array([[b1], [b2]])}
+\NormalTok{    beta1 }\OperatorTok{=}\NormalTok{ b3}
+
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(m):}
+\NormalTok{        x }\OperatorTok{=}\NormalTok{ X[i].reshape(}\OperatorTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{)  }\CommentTok{\# (2×1)}
+\NormalTok{        f0 }\OperatorTok{=}\NormalTok{ Omega0 }\OperatorTok{@}\NormalTok{ x }\OperatorTok{+}\NormalTok{ beta0}
+\NormalTok{        h1 }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{f0))}
+\NormalTok{        h1\_d }\OperatorTok{=}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{f0) }\OperatorTok{/}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{f0))}\OperatorTok{**}\DecValTok{2}
+\NormalTok{        y\_hat }\OperatorTok{=} \BuiltInTok{float}\NormalTok{((Omega1 }\OperatorTok{@}\NormalTok{ h1 }\OperatorTok{+}\NormalTok{ beta1)[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{])  }
+
+        \CommentTok{\# Backward pass}
+\NormalTok{        dL\_df1 }\OperatorTok{=}\NormalTok{ np.array([[}\OperatorTok{{-}}\DecValTok{2} \OperatorTok{*}\NormalTok{ (y[i] }\OperatorTok{{-}}\NormalTok{ y\_hat)]])  }
+\NormalTok{        dL\_df0 }\OperatorTok{=}\NormalTok{ (Omega1.T }\OperatorTok{@}\NormalTok{ dL\_df1) }\OperatorTok{*}\NormalTok{ h1\_d}
+
+        \CommentTok{\# Gradientes}
+\NormalTok{        dL\_dbeta1 }\OperatorTok{=}\NormalTok{ dL\_df1[}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{]  }
+\NormalTok{        dL\_dbeta0 }\OperatorTok{=}\NormalTok{ dL\_df0}
+\NormalTok{        dL\_dOmega1 }\OperatorTok{=}\NormalTok{ dL\_df1 }\OperatorTok{@}\NormalTok{ h1.T  }
+\NormalTok{        dL\_dOmega0 }\OperatorTok{=}\NormalTok{ dL\_df0 }\OperatorTok{@}\NormalTok{ x.T}
+
+\NormalTok{        grad\_i }\OperatorTok{=}\NormalTok{ np.concatenate([}
+\NormalTok{            dL\_dOmega0.flatten(),  }\CommentTok{\# w1, w2, w3, w4}
+\NormalTok{            dL\_dOmega1.flatten(),  }\CommentTok{\# w5, w6}
+\NormalTok{            dL\_dbeta0.flatten(),   }\CommentTok{\# b1, b2}
+\NormalTok{            [dL\_dbeta1]            }\CommentTok{\# b3}
+\NormalTok{        ])}
+
+\NormalTok{        grad\_total }\OperatorTok{+=}\NormalTok{ grad\_i}
+    
+    \ControlFlowTok{return}\NormalTok{ grad\_total }\OperatorTok{/}\NormalTok{ m}
+\end{Highlighting}
+\end{Shaded}
+
+Algumas obsevações sobre a função acima:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(\textnormal{gradtotal = np.zeros(9)}\) inicia com um vetor de
+  tamanho \(9\) em que todas as entradas são \(0\) e vamos preenchendo
+  com cada etapa do algoritmo.
+\item
+  \(\textnormal{x = X[i].reshape(-1, 1)}\) transforma a \(i\)-ésima
+  linha da matriz \(X\) em coluna.
+\item
+  \(\textnormal{@}\) é uma outra notação (mais limpa) do operador
+  multiplicador de matrizes.
+\item
+  No Python, o produto de Hadamard é calculado com o operador \texttt{*}
+  entre arrays do numpy.
+\item
+  \(\textnormal{np.concatenate}\) vai transformar as matrizes num vetor
+  seguinto a ordem dos vetor gradiente.
+\end{enumerate}
+
+\textbf{Versão Vetorizada:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ gradiente\_vetorizado(X: np.ndarray, y: np.ndarray, phi: np.ndarray) }\OperatorTok{{-}\textgreater{}}\NormalTok{ np.ndarray:}
+\NormalTok{    w1, w2, w3, w4, w5, w6, b1, b2, b3 }\OperatorTok{=}\NormalTok{ phi}
+\NormalTok{    m }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(X)}
+    
+    \CommentTok{\# Construir matrizes}
+\NormalTok{    Omega0 }\OperatorTok{=}\NormalTok{ np.array([[w1, w2], [w3, w4]])}
+\NormalTok{    beta0 }\OperatorTok{=}\NormalTok{ np.array([[b1], [b2]])}
+\NormalTok{    Omega1 }\OperatorTok{=}\NormalTok{ np.array([[w5, w6]])}
+\NormalTok{    beta1 }\OperatorTok{=}\NormalTok{ b3}
+    
+    \CommentTok{\# Forward pass vetorizado}
+\NormalTok{    X\_T }\OperatorTok{=}\NormalTok{ X.T  }\CommentTok{\# (2×m)}
+    
+\NormalTok{    F0 }\OperatorTok{=}\NormalTok{ Omega0 }\OperatorTok{@}\NormalTok{ X\_T }\OperatorTok{+}\NormalTok{ beta0  }\CommentTok{\# (2 × m)}
+\NormalTok{    H1 }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{F0))}
+\NormalTok{    H1\_d }\OperatorTok{=}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{F0) }\OperatorTok{/}\NormalTok{ (}\DecValTok{1} \OperatorTok{+}\NormalTok{ np.exp(}\OperatorTok{{-}}\NormalTok{F0))}\OperatorTok{**}\DecValTok{2}  
+\NormalTok{    Y\_hat }\OperatorTok{=}\NormalTok{ (Omega1 }\OperatorTok{@}\NormalTok{ H1 }\OperatorTok{+}\NormalTok{ beta1).flatten()  }\CommentTok{\# (m,)}
+    
+    
+\NormalTok{    dL\_dYhat }\OperatorTok{=} \OperatorTok{{-}}\DecValTok{2} \OperatorTok{*}\NormalTok{ (y }\OperatorTok{{-}}\NormalTok{ Y\_hat)  }
+    
+    \CommentTok{\# Camada de saída}
+\NormalTok{    dL\_dOmega1 }\OperatorTok{=}\NormalTok{ (dL\_dYhat.reshape(}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{) }\OperatorTok{@}\NormalTok{ H1.T) }\OperatorTok{/}\NormalTok{ m  }
+\NormalTok{    dL\_dbeta1 }\OperatorTok{=}\NormalTok{ np.mean(dL\_dYhat)}
+    
+    
+\NormalTok{    dL\_dF0 }\OperatorTok{=}\NormalTok{ (Omega1.T }\OperatorTok{@}\NormalTok{ dL\_dYhat.reshape(}\DecValTok{1}\NormalTok{, }\OperatorTok{{-}}\DecValTok{1}\NormalTok{)) }\OperatorTok{*}\NormalTok{ H1\_d  }
+\NormalTok{    dL\_dOmega0 }\OperatorTok{=}\NormalTok{ (dL\_dF0 }\OperatorTok{@}\NormalTok{ X) }\OperatorTok{/}\NormalTok{ m   }
+\NormalTok{    dL\_dbeta0 }\OperatorTok{=}\NormalTok{ np.mean(dL\_dF0, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{, keepdims}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }
+    
+    \CommentTok{\# Juntar todos os gradientes}
+    \ControlFlowTok{return}\NormalTok{ np.concatenate([}
+\NormalTok{        dL\_dOmega0.flatten(),  }
+\NormalTok{        dL\_dOmega1.flatten(),    }
+\NormalTok{        dL\_dbeta0.flatten(),   }
+\NormalTok{        [dL\_dbeta1]            }
+\NormalTok{    ])}
+\end{Highlighting}
+\end{Shaded}
+
+Vamos testar as duas funções de gradiente acima:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi\_test }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{, }\FloatTok{0.1}\NormalTok{])}
+
+
+\NormalTok{start }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{grad\_loop }\OperatorTok{=}\NormalTok{ gradiente(train\_set[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values, }
+\NormalTok{                      train\_set[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values, phi\_test)}
+\NormalTok{end }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{tempo\_loop }\OperatorTok{=}\NormalTok{ end }\OperatorTok{{-}}\NormalTok{ start}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Versão com Loop: }\SpecialCharTok{\{}\NormalTok{tempo\_loop}\SpecialCharTok{:.4f\}}\SpecialStringTok{ segundos"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"   Gradiente: }\SpecialCharTok{\{}\NormalTok{grad\_loop}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+
+
+\NormalTok{start }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{grad\_vec }\OperatorTok{=}\NormalTok{ gradiente\_vetorizado(train\_set[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values,}
+\NormalTok{                               train\_set[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values, phi\_test)}
+\NormalTok{end }\OperatorTok{=}\NormalTok{ time.time()}
+\NormalTok{tempo\_vec }\OperatorTok{=}\NormalTok{ end }\OperatorTok{{-}}\NormalTok{ start}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Versão Vetorizada: }\SpecialCharTok{\{}\NormalTok{tempo\_vec}\SpecialCharTok{:.4f\}}\SpecialStringTok{ segundos"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"   Gradiente: }\SpecialCharTok{\{}\NormalTok{grad\_vec}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Versão com Loop: 2.3113 segundos
+   Gradiente: [ -0.18243468   0.63490074  -0.18243468   0.63490074 -22.29573326
+ -22.29573326  -1.07108422  -1.07108422 -43.32383571]
+Versão Vetorizada: 0.0079 segundos
+   Gradiente: [ -0.18243468   0.63490074  -0.18243468   0.63490074 -22.29573326
+ -22.29573326  -1.07108422  -1.07108422 -43.32383571]
+\end{verbatim}
+
+Considerando que vamos rodar vários passos desse mesmo algoritmo,
+escolheremos a \textbf{versão vetorizada}. \vspace{.4cm} \noindent
+
+\subsubsection{E. Método Gradiente}\label{e.-muxe9todo-gradiente}
+
+\subsection{E. Método Gradiente}
+
+Vamos aplicar o \textbf{método do gradiente descendente} para encontrar
+os parâmetros que minimizam a função de perda no \textbf{conjunto de
+treino} considerando a inicialização abaixo, a taxa de aprendizagem
+\(\epsilon = 0.1\) com \(100\) iterações.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{def}\NormalTok{ gradiente\_descendente(X\_train: np.ndarray, }
+\NormalTok{                         y\_train: np.ndarray,}
+\NormalTok{                         X\_val: np.ndarray, }
+\NormalTok{                         y\_val: np.ndarray,}
+\NormalTok{                         e: }\BuiltInTok{float}\NormalTok{,}
+\NormalTok{                         phi: np.ndarray,}
+\NormalTok{                         inic: np.ndarray,}
+\NormalTok{                         n: }\BuiltInTok{int}\NormalTok{) }\OperatorTok{{-}\textgreater{}} \BuiltInTok{tuple}\NormalTok{[np.ndarray, }\BuiltInTok{list}\NormalTok{, }\BuiltInTok{list}\NormalTok{, }\BuiltInTok{int}\NormalTok{, }\BuiltInTok{float}\NormalTok{, }\BuiltInTok{int}\NormalTok{]:}
+
+\NormalTok{    phi\_atual }\OperatorTok{=}\NormalTok{ phi.copy()}
+
+    \CommentTok{\# Listas para armazenar as losses em cada iteração}
+\NormalTok{    train\_losses }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{    val\_losses }\OperatorTok{=}\NormalTok{ []}
+
+\NormalTok{    melhor\_phi }\OperatorTok{=}\NormalTok{ phi\_atual.copy()}
+\NormalTok{    melhor\_val\_loss }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\StringTok{\textquotesingle{}inf\textquotesingle{}}\NormalTok{) }\CommentTok{\#nada é \textquotesingle{}maior\textquotesingle{}}
+\NormalTok{    melhor\_train\_loss }\OperatorTok{=} \BuiltInTok{float}\NormalTok{(}\StringTok{\textquotesingle{}inf\textquotesingle{}}\NormalTok{)}
+\NormalTok{    melhor\_iter\_val }\OperatorTok{=} \DecValTok{0}
+\NormalTok{    melhor\_iter\_train }\OperatorTok{=} \DecValTok{0}
+
+    \ControlFlowTok{for}\NormalTok{ iteration }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n):}
+
+\NormalTok{        grad }\OperatorTok{=}\NormalTok{ gradiente\_vetorizado(X\_train, y\_train, phi\_atual)}
+
+        \CommentTok{\#atualização de parâmetro (na direção oposta ao gradiente)}
+\NormalTok{        phi\_atual }\OperatorTok{=}\NormalTok{ phi\_atual }\OperatorTok{{-}}\NormalTok{ e }\OperatorTok{*}\NormalTok{ grad }
+
+\NormalTok{        train\_loss }\OperatorTok{=}\NormalTok{ loss\_vetorizada(pd.DataFrame(\{}
+                \StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{: X\_train[:, }\DecValTok{0}\NormalTok{], }
+                \StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{: X\_train[:, }\DecValTok{1}\NormalTok{],}
+                \StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{: y\_train}
+\NormalTok{            \}), phi\_atual)}
+
+\NormalTok{        val\_loss }\OperatorTok{=}\NormalTok{ loss\_vetorizada(pd.DataFrame(\{}
+                \StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{: X\_val[:, }\DecValTok{0}\NormalTok{],}
+                \StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{: X\_val[:, }\DecValTok{1}\NormalTok{], }
+                \StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{: y\_val}
+\NormalTok{            \}), phi\_atual)    }
+
+\NormalTok{        train\_losses.append(train\_loss)}
+\NormalTok{        val\_losses.append(val\_loss)}
+
+        \ControlFlowTok{if}\NormalTok{ val\_loss }\OperatorTok{\textless{}}\NormalTok{ melhor\_val\_loss:}
+\NormalTok{            melhor\_val\_loss }\OperatorTok{=}\NormalTok{ val\_loss}
+\NormalTok{            melhor\_phi }\OperatorTok{=}\NormalTok{ phi\_atual.copy()}
+\NormalTok{            melhor\_train\_loss }\OperatorTok{=}\NormalTok{ train\_loss}
+\NormalTok{            melhor\_iter\_val }\OperatorTok{=}\NormalTok{ iteration}
+
+        \ControlFlowTok{if}\NormalTok{ train\_loss }\OperatorTok{\textless{}}\NormalTok{ melhor\_train\_loss:       }
+\NormalTok{            melhor\_train\_loss }\OperatorTok{=}\NormalTok{ train\_loss}
+\NormalTok{            melhor\_iter\_train }\OperatorTok{=}\NormalTok{ iteration   }
+
+    \ControlFlowTok{return}\NormalTok{ melhor\_phi, train\_losses, val\_losses, melhor\_iter\_val, melhor\_train\_loss, melhor\_iter\_train, melhor\_val\_loss}
+\end{Highlighting}
+\end{Shaded}
+
+Na função acima, armazenamos as perdas em cada passo (tanto na validação
+como no teste) para que, posteriormente, o gráfico fique mais fácil de
+ser gerado. Além disso, vamos exibir também a melhor iteração para cada
+conjunto.
+
+A função acima irá retornar, nessa ordem:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  melhor\_phi
+\item
+  train\_losses
+\item
+  val\_losses
+\item
+  melhor\_iter\_val
+\item
+  melhor\_train\_loss
+\item
+  melhor\_iter\_train
+\item
+  melhor\_val\_loss
+\end{enumerate}
+
+Iniciaremos o algoritmo no vetor de parâmetros
+
+\begin{equation*}
+\mathbf{\Phi}^0 = \left\{ 
+\mathbf{\Omega} = \left\{
+\mathbf{\Omega}_0 = 
+  \begin{pmatrix}
+  0 & 0 \\
+  0 & 0
+  \end{pmatrix}, 
+\mathbf{\Omega}_1  = 
+  \begin{pmatrix}
+  0 & 0  
+  \end{pmatrix} \right\}, 
+\mathbf{\beta} = \left\{
+\mathbf{\beta}_0 = 
+  \begin{pmatrix}
+  0 \\ 0  
+  \end{pmatrix}, 
+\mathbf{\beta}_1 = 0 \right\}
+\right\},
+\end{equation*}
+
+usando a taxa de aprendizagem \(\epsilon=0.1\) e com \(100\) iterações.
+Para cada uma delas, vamos a perda no \textbf{conjunto de validação}.
+Apresente a lista de parâmetros estimados (isto é, aqueles que geraram a
+menor perda na validação), indique em qual iteração eles foram
+observados e comente o resultado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{phi\_inicial }\OperatorTok{=}\NormalTok{ np.array([}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{])}
+\NormalTok{x }\OperatorTok{=}\NormalTok{ (}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# Agora desempacotando 7 valores}
+\NormalTok{melhor\_phi, train\_losses, val\_losses, melhor\_iter\_val, melhor\_train\_loss, melhor\_iter\_train, melhor\_val\_loss }\OperatorTok{=}\NormalTok{ gradiente\_descendente(}
+\NormalTok{    X\_train}\OperatorTok{=}\NormalTok{train\_set[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values,}
+\NormalTok{    y\_train}\OperatorTok{=}\NormalTok{train\_set[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values,}
+\NormalTok{    X\_val}\OperatorTok{=}\NormalTok{validation\_set[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values,}
+\NormalTok{    y\_val}\OperatorTok{=}\NormalTok{validation\_set[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values,}
+\NormalTok{    e}\OperatorTok{=}\FloatTok{0.1}\NormalTok{,}
+\NormalTok{    phi}\OperatorTok{=}\NormalTok{phi\_inicial,}
+\NormalTok{    inic}\OperatorTok{=}\NormalTok{x,}
+\NormalTok{    n}\OperatorTok{=}\DecValTok{100}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Melhor validação: iteração }\SpecialCharTok{\{}\NormalTok{melhor\_iter\_val}\SpecialCharTok{\}}\SpecialStringTok{, loss: }\SpecialCharTok{\{}\NormalTok{melhor\_val\_loss}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Melhor treino: iteração }\SpecialCharTok{\{}\NormalTok{melhor\_iter\_train}\SpecialCharTok{\}}\SpecialStringTok{, loss: }\SpecialCharTok{\{}\NormalTok{melhor\_train\_loss}\SpecialCharTok{:.4f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Parâmetros finais: }\SpecialCharTok{\{}\NormalTok{melhor\_phi}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Melhor validação: iteração 16, loss: 149.4005
+Melhor treino: iteração 17, loss: 145.8916
+Parâmetros finais: [-0.75778832 -2.40989992 -0.75778832 -2.40989992  8.2280801   8.2280801
+  2.17300733  2.17300733 11.38825398]
+\end{verbatim}
+
+A menor perda na validação foi encontrada na iteração \(16\), ou seja,
+depois disso, a perda irá ter um aumento (para esse tamanho de passo,
+possivelmente há uma oscilação em torno do ponto de mínimo, sem alcançar
+o mesmo depois da iteração em questão - possivelmente pelo tamanho do
+passo e pelo método sem momento que estamos utilizando). Comentaremos
+melhor esse aumento considerando a comparação com o conjunto de
+treinamento no item seguinte.
+
+Vamos testar uma inicialização não simétrica para entender se a simetria
+gerada no exemplo anterior é algum problema da função em si (o que no
+caso, não será, a questão da simetria nos parâmetros é gerada pela
+inicialização anterior):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Teste com inicialização assimétrica}
+\NormalTok{phi\_test }\OperatorTok{=}\NormalTok{ np.array([}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.2}\NormalTok{, }\FloatTok{0.3}\NormalTok{, }\FloatTok{0.4}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.6}\NormalTok{, }\FloatTok{0.7}\NormalTok{, }\FloatTok{0.8}\NormalTok{, }\FloatTok{0.9}\NormalTok{])}
+
+\NormalTok{grad }\OperatorTok{=}\NormalTok{ gradiente\_vetorizado(}
+\NormalTok{    train\_set[[}\StringTok{\textquotesingle{}x1.obs\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}x2.obs\textquotesingle{}}\NormalTok{]].values[:}\DecValTok{100}\NormalTok{],  }\CommentTok{\# Use menos dados para teste}
+\NormalTok{    train\_set[}\StringTok{\textquotesingle{}y\textquotesingle{}}\NormalTok{].values[:}\DecValTok{100}\NormalTok{], }
+\NormalTok{    phi\_test}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(}\StringTok{"Gradientes:"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"dW1, dW2, dW3, dW4: }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{2}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{3}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"dW5, dW6: }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{4}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{5}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"dB1, dB2, dB3: }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{6}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{7}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{grad[}\DecValTok{8}\NormalTok{]}\SpecialCharTok{:.6f\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Gradientes:
+dW1, dW2, dW3, dW4: -0.473852, 2.901149, -0.045680, 3.555326
+dW5, dW6: -27.160485, -26.985960
+dB1, dB2, dB3: -4.711250, -5.283830, -42.063918
+\end{verbatim}
+
+\subsubsection{E. Gráfico do custo no conjunto de treinamento e
+validação}\label{e.-gruxe1fico-do-custo-no-conjunto-de-treinamento-e-validauxe7uxe3o}
+
+\subsection{E. Gráfico do custo no conjunto de treinamento e validação}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Folha de estilo}
+\NormalTok{plt.style.use(}\StringTok{"ggplot"}\NormalTok{)}
+
+\NormalTok{plt.rc(}\StringTok{"axes"}\NormalTok{, facecolor}\OperatorTok{=}\StringTok{"\#fafafa"}\NormalTok{, grid}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }
+\NormalTok{plt.rc(}\StringTok{"grid"}\NormalTok{, color}\OperatorTok{=}\StringTok{"\#f0f0f0"}\NormalTok{) }
+
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+
+\CommentTok{\# Subplot 1: Visão geral}
+\NormalTok{plt.subplot(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)}
+\NormalTok{plt.plot(train\_losses, label}\OperatorTok{=}\StringTok{\textquotesingle{}Treino\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(val\_losses, label}\OperatorTok{=}\StringTok{\textquotesingle{}Validação\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.axvline(melhor\_iter\_val, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.7}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Iteração\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Loss\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Evolução do Custo\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+
+\CommentTok{\# Subplot 2: Zoom CRÍTICO (iterações 3{-}12)}
+\CommentTok{\# Folha de estilo}
+\NormalTok{plt.style.use(}\StringTok{"ggplot"}\NormalTok{)}
+
+\NormalTok{plt.rc(}\StringTok{"axes"}\NormalTok{, facecolor}\OperatorTok{=}\StringTok{"\#fafafa"}\NormalTok{, grid}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }
+\NormalTok{plt.rc(}\StringTok{"grid"}\NormalTok{, color}\OperatorTok{=}\StringTok{"\#f0f0f0"}\NormalTok{) }
+\NormalTok{plt.subplot(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{start\_zoom }\OperatorTok{=} \DecValTok{3}
+\NormalTok{end\_zoom }\OperatorTok{=} \DecValTok{12}
+\NormalTok{iterations\_zoom }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(start\_zoom, end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{plt.plot(iterations\_zoom, train\_losses[start\_zoom:end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{], label}\OperatorTok{=}\StringTok{\textquotesingle{}Treino\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }
+\NormalTok{         linewidth}\OperatorTok{=}\FloatTok{2.5}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+\NormalTok{plt.plot(iterations\_zoom, val\_losses[start\_zoom:end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{], label}\OperatorTok{=}\StringTok{\textquotesingle{}Validação\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }
+\NormalTok{         linewidth}\OperatorTok{=}\FloatTok{2.5}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}s\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+
+\CommentTok{\# Ajustar a linha vertical da melhor iteração se estiver no range}
+\ControlFlowTok{if}\NormalTok{ start\_zoom }\OperatorTok{\textless{}=}\NormalTok{ melhor\_iter\_val }\OperatorTok{\textless{}=}\NormalTok{ end\_zoom:}
+\NormalTok{    plt.axvline(melhor\_iter\_val, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{, }
+\NormalTok{                linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Melhor validação (iter }\SpecialCharTok{\{}\NormalTok{melhor\_iter\_val}\SpecialCharTok{\}}\SpecialStringTok{)\textquotesingle{}}\NormalTok{)}
+    
+    \CommentTok{\# Destacar o ponto mínimo apenas se estiver no range}
+\NormalTok{    plt.plot(melhor\_iter\_val, melhor\_val\_loss, }\StringTok{\textquotesingle{}ro\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{8}\NormalTok{, }
+\NormalTok{             label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Loss mínima: }\SpecialCharTok{\{}\NormalTok{melhor\_val\_loss}\SpecialCharTok{:.1f\}}\SpecialStringTok{\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Iteração\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Loss\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Zoom: Região Crítica (Iterações 3{-}12)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.xticks(}\BuiltInTok{range}\NormalTok{(start\_zoom, end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{))  }\CommentTok{\# Forçar mostrar todas as iterações}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+
+\CommentTok{\# Subplot 3: Zoom CRÍTICO (iterações 7{-}18)}
+\CommentTok{\# Folha de estilo}
+\NormalTok{plt.style.use(}\StringTok{"ggplot"}\NormalTok{)}
+
+\NormalTok{plt.rc(}\StringTok{"axes"}\NormalTok{, facecolor}\OperatorTok{=}\StringTok{"\#fafafa"}\NormalTok{, grid}\OperatorTok{=}\VariableTok{True}\NormalTok{)  }
+\NormalTok{plt.rc(}\StringTok{"grid"}\NormalTok{, color}\OperatorTok{=}\StringTok{"\#f0f0f0"}\NormalTok{) }
+\NormalTok{plt.subplot(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{start\_zoom }\OperatorTok{=} \DecValTok{7}
+\NormalTok{end\_zoom }\OperatorTok{=} \DecValTok{18}
+\NormalTok{iterations\_zoom }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(start\_zoom, end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{plt.plot(iterations\_zoom, train\_losses[start\_zoom:end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{], label}\OperatorTok{=}\StringTok{\textquotesingle{}Treino\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }
+\NormalTok{         linewidth}\OperatorTok{=}\FloatTok{2.5}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}o\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+\NormalTok{plt.plot(iterations\_zoom, val\_losses[start\_zoom:end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{], label}\OperatorTok{=}\StringTok{\textquotesingle{}Validação\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, }
+\NormalTok{         linewidth}\OperatorTok{=}\FloatTok{2.5}\NormalTok{, marker}\OperatorTok{=}\StringTok{\textquotesingle{}s\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{4}\NormalTok{)}
+
+\CommentTok{\# Ajustar a linha vertical da melhor iteração se estiver no range}
+\ControlFlowTok{if}\NormalTok{ start\_zoom }\OperatorTok{\textless{}=}\NormalTok{ melhor\_iter\_val }\OperatorTok{\textless{}=}\NormalTok{ end\_zoom:}
+\NormalTok{    plt.axvline(melhor\_iter\_val, color}\OperatorTok{=}\StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.8}\NormalTok{, }
+\NormalTok{                linewidth}\OperatorTok{=}\DecValTok{2}\NormalTok{, label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Melhor validação (iter }\SpecialCharTok{\{}\NormalTok{melhor\_iter\_val}\SpecialCharTok{\}}\SpecialStringTok{)\textquotesingle{}}\NormalTok{)}
+    
+    \CommentTok{\# Destacar o ponto mínimo apenas se estiver no range}
+\NormalTok{    plt.plot(melhor\_iter\_val, melhor\_val\_loss, }\StringTok{\textquotesingle{}ro\textquotesingle{}}\NormalTok{, markersize}\OperatorTok{=}\DecValTok{8}\NormalTok{, }
+\NormalTok{             label}\OperatorTok{=}\SpecialStringTok{f\textquotesingle{}Loss mínima: }\SpecialCharTok{\{}\NormalTok{melhor\_val\_loss}\SpecialCharTok{:.1f\}}\SpecialStringTok{\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Iteração\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Loss\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}Zoom: Região Crítica (Iterações 3{-}12)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.grid(}\VariableTok{True}\NormalTok{, alpha}\OperatorTok{=}\FloatTok{0.3}\NormalTok{)}
+\NormalTok{plt.xticks(}\BuiltInTok{range}\NormalTok{(start\_zoom, end\_zoom }\OperatorTok{+} \DecValTok{1}\NormalTok{))  }\CommentTok{\# Forçar mostrar todas as iterações}
+
+\NormalTok{plt.tight\_layout()}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lista_2_RebecaChuffi_files/figure-pdf/cell-18-output-1.pdf}}
+
+\pandocbounded{\includegraphics[keepaspectratio]{Lista_2_RebecaChuffi_files/figure-pdf/cell-18-output-2.pdf}}
+
+Passei um tempo tentando entender porque o comportamento no segundo
+gráfico (zoom) o conjunto de validação e treino eapresentam
+comportamentos tão semelhantes consideranto a perda de cada um (em cada
+iteração). Imagino que seja porque o conjunto de treino e validação têm
+propriedades estatísticas descritivas semelhantes (fiz um teste com isso
+fora do escopo desse trabalho), então se há aprendizado no conjunto de
+teste, haverá também aprendizado no conjunto de validação. Nesse caso,
+concluímos que o modelo está generalizando bem dados não vistos (nesse
+caso, de validação).
+
+Além disso, note que, no \textbf{gráfico 2}, conseguimos ver que na
+iteração 9 existe um aumento da loss para ambos os conjuntos. Como não
+estamos considerando um gráfico de loss \emph{versus} número de
+parâmetro, NÃO se caracteriza o double descent. Nesse caso,
+provavelmente o learning rate está muito alto para essa etapa, ou seja,
+o passo está indo em direção ao ponto de menor loss, mas a função PASSA
+desse ponto para um segundo com a loss maior. Depois, aos poucos, a loss
+volta a descer, tentando se aproximar do mínimo, apesar do tamanho do
+passo. É possível notar que, no terceiro gráfico, a loss no conjunto de
+treino fica ``oscilando'' depois de algumas iterações - possivelmente
+procurando o ponto de mínimo, mas nunca atingindo por conta do tamanho
+do passo. Assim, por mais que tenhamos \(100\) iterações, não há melhora
+depois da décima sétima para o conjunto de treino e décima sexta para o
+conjunto de validação. Dessa forma, escolheríamos os parâmetros da
+iteração \(16\):
+
+\begin{verbatim}
+Melhor validação: iteração 16, loss: 149.4005
+Parâmetros finais: [-0.75778832 -2.40989992 -0.75778832 -2.40989992  8.2280801   8.2280801
+  2.17300733  2.17300733 11.38825398]
+\end{verbatim}
+
+Não foi solicitado que testássemos no conjunto de teste, mas caso fosse
+esse o caso, usaríamos os parâmetros escolhidos anteriormente para
+testar a performance do modelo no conjunto de teste.
+
+
+
+
+\end{document}
